@@ -1,0 +1,33 @@
+<p>generic-table works!</p>
+<!-- <div *ngIf="isLoading" class="loading">Loading...</div>
+
+<div *ngIf="hasError" class="error">
+  Failed to load data. Please try again later.
+</div> -->
+
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns; trackBy: trackByIndex">
+        {{ column.label }}
+      </th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngIf="data.length === 0">
+      <td colspan="{{ columns.length }}" class="empty-state">No data available</td>
+    </tr> -->
+    <tr *ngFor="let row of data; trackBy: trackByRowId">
+      <td *ngFor="let column of columns">
+        {{ row[column.key] }}
+      </td>
+      <td>
+        <button (updateEvent)="updateData(row)">Update</button>
+      </td>
+      <td>
+        <button (deleteEvent)="deleteData(row)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
