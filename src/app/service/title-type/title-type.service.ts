@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TitleTypeService extends GenericService<TitleType>{
 
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl+"/title-type")
+  constructor(http : HttpClient) {
+    super(http,"/title-types")
   }
 }

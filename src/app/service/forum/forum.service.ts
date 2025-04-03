@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ForumService extends GenericService<Forum>{
 
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl+"/forum");
+  constructor(http : HttpClient) {
+    super(http, "/forums");
   }
 }

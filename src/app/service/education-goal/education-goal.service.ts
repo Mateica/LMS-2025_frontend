@@ -7,7 +7,7 @@ import { EducationGoal } from '../../model/education-goal';
   providedIn: 'root'
 })
 export class EducationGoalService extends GenericService<EducationGoal>{
-  constructor(http : HttpClient, baseUrl: string) {
-      super(http, baseUrl+"/education-goal")
+  constructor(http : HttpClient) {
+      super(http,"/education-goals")
    }
 }

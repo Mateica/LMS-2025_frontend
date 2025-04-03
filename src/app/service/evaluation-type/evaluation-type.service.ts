@@ -8,7 +8,7 @@ import { EvaluationType } from '../../model/evaluation-type';
 })
 export class EvaluationTypeService extends GenericService<EvaluationType>{
 
-  constructor(http : HttpClient, baseUrl: string) {
-    super(http, baseUrl+"/evaluation-type")
+  constructor(http : HttpClient) {
+    super(http, "/evaluation-types")
   }
 }

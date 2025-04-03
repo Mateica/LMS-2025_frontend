@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class EvaluationService extends GenericService<Evaluation> {
-  constructor(http : HttpClient, baseUrl: string) {
-      super(http, baseUrl+"/evaluation");
+  constructor(http : HttpClient) {
+      super(http,"/evaluations");
    }
 }

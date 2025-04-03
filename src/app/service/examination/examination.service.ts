@@ -7,7 +7,7 @@ import { Examination } from '../../model/examination';
   providedIn: 'root'
 })
 export class ExaminationService extends GenericService<Examination>{
-  constructor(http : HttpClient, baseUrl: string) {
-    super(http, baseUrl+"/examination")
+  constructor(http : HttpClient) {
+    super(http,"/examinations")
   }
 }

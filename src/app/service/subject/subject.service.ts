@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SubjectService extends GenericService<Subject>{
 
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl+"/subject");
+  constructor(http : HttpClient) {
+    super(http, "/subjects");
   }
 }

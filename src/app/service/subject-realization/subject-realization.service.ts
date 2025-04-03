@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SubjectRealizationService extends GenericService<SubjectRealization>{
 
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl+"/subject-realization")
+  constructor(http : HttpClient) {
+    super(http,"/subject-realizations")
   }
 }

@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FileService extends GenericService<File>{
 
-  constructor(http : HttpClient, baseUrl : string) { 
-    super(http, baseUrl+"/file")
+  constructor(http : HttpClient) { 
+    super(http, "/files")
   }
 }

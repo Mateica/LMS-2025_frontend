@@ -8,7 +8,7 @@ import { Outcome } from '../../model/outcome';
 })
 export class OutcomeService extends GenericService<Outcome> {
 
-  constructor(http : HttpClient ,baseUrl: string) { 
-    super(http, baseUrl+"/outcome");
+  constructor(http : HttpClient) { 
+    super(http,"/outcomes");
   }
 }

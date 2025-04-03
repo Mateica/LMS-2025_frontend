@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ForumUserService extends GenericService<ForumUser>{
-
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl + "/forum-user");
+  constructor(http : HttpClient) {
+    super(http, "/forum-users");
   }
 }

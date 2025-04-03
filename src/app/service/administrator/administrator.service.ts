@@ -8,7 +8,7 @@ import { Administrator } from '../../model/administrator';
 })
 export class AdministratorService extends GenericService<Administrator>{
 
-  constructor(http : HttpClient, baseUrl: string) { 
-    super(http, baseUrl+"/admin");
+  constructor(http : HttpClient) { 
+    super(http,"/admin");
   }
 }

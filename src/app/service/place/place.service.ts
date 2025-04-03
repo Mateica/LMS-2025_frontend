@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PlaceService extends GenericService<Place>{
 
-  constructor(http : HttpClient, baseUrl : string) { 
-    super(http, baseUrl+"/place");
+  constructor(http : HttpClient) { 
+    super(http, "/places");
   }
 }

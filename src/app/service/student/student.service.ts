@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class StudentService extends GenericService<Student>{
-
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl+"/student");
+  constructor(http : HttpClient) {
+    super(http, "/students");
   }
 }

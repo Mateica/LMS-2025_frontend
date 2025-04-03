@@ -8,7 +8,7 @@ import { Message } from '../../model/message';
 })
 export class MessageService extends GenericService<Message>{
 
-  constructor(http : HttpClient, baseUrl : string) { 
-    super(http, baseUrl+"/message");
+  constructor(http : HttpClient) { 
+    super(http,"/messages");
   }
 }

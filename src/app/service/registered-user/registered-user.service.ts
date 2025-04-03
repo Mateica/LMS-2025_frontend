@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RegisteredUserService extends GenericService<RegisteredUser>{
-  constructor(http : HttpClient,baseUrl: string) { 
-    super(http, baseUrl+"/registered-user");
+  constructor(http : HttpClient) { 
+    super(http, "/registered-users");
   }
 }

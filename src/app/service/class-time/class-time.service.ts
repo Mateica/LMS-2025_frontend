@@ -8,7 +8,7 @@ import { ClassTime } from '../../model/class-time';
 })
 export class ClassTimeService extends GenericService<ClassTime>{
 
-  constructor(http : HttpClient, baseUrl: string) {
-      super(http, baseUrl+"/class-time");
+  constructor(http : HttpClient) {
+      super(http,"/class-times");
    }
 }

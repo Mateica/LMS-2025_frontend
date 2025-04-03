@@ -8,7 +8,7 @@ import { TeachingMaterial } from '../../model/teaching-material';
 })
 export class TeachingMaterialService extends GenericService<TeachingMaterial>{
 
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl+"/teaching-material")
+  constructor(http : HttpClient) {
+    super(http, "/teaching-materials")
   }
 }

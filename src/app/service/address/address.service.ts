@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AddressService extends GenericService<Address>{
-
-  constructor(http : HttpClient, baseUrl: string) { 
-    super(http, baseUrl+"/address");
+  constructor(http : HttpClient) { 
+    super(http, "/addresses");
   }
 }

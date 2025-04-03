@@ -7,7 +7,7 @@ import { GenericService } from '../base/generic.service';
 })
 export class NotificationService extends GenericService<Notification>{
 
-  constructor(http : HttpClient, baseUrl : string) {
-    super(http, baseUrl+"/notification");
+  constructor(http : HttpClient) {
+    super(http,"/notifications");
   }
 }

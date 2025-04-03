@@ -8,6 +8,6 @@ import { Country } from '../../model/country';
 })
 export class CountryService extends GenericService<Country>{
   constructor(http : HttpClient) { 
-    super(http, "/country");
+    super(http, "/countries");
   }
 }

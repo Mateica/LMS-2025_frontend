@@ -8,7 +8,7 @@ import { TeachingType } from '../../model/teaching-type';
 })
 export class TeachingTypeService extends GenericService<TeachingType>{
 
-  constructor(http : HttpClient, baseUrl : string) { 
-    super(http, baseUrl+"/teaching-type")
+  constructor(http : HttpClient) { 
+    super(http,"/teaching-types")
   }
 }
