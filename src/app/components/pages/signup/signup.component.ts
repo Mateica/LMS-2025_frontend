@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
+import { SignupCredentials } from '../../../model/user-credentials';
+import { RegisteredUser } from '../../../model/registered-user';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +13,9 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class SignupComponent {
   public signupForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    dateOfBirth : new FormControl(new Date(), [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })
@@ -21,9 +25,18 @@ export class SignupComponent {
   public onSubmit() {
     if (this.signupForm.valid) {
       console.log(this.signupForm.value);
-      this.service.signUp(this.signupForm.value)
+
+      const {firstName = '', lastName = '', dateOfBirth, email = '', password = ''} = this.signupForm.value;
+
+      if(firstName === '' || lastName === '' || email === '' || password === ''){
+        alert("Signup error!");
+        return;
+      }
+
+      const signupCredentials : SignupCredentials = {firstName : firstName ?? '', lastName : lastName ?? '', dateOfBirth : dateOfBirth ?? new Date(), email : email ?? '', password : password ?? ''};
+      this.service.signUp(signupCredentials)
         .subscribe({
-          next: (data: any) => {
+          next: (data: RegisteredUser) => {
             console.log(data);
             this.router.navigate(['/login']);
           },

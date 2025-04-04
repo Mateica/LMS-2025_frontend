@@ -1,4 +1,5 @@
 import { ForumUser } from "./forum-user"
+import { Role } from "./role";
 
 export interface RegisteredUser {
     id : number;
