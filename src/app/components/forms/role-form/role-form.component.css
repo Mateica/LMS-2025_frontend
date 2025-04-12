@@ -5,13 +5,13 @@
 :host {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(101, 248, 253);
+    background-color: rgb(101, 248, 253);
+
 }
 
-.signup-card {
+.role-card {
     border-radius: 10px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
     width: 40%;
@@ -48,15 +48,4 @@
     border: none;
     padding: 8px 15px;
     width: 100%;
-}
-
-.card-terms {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-}
-
-.card-terms span {
-    margin: 5px;
-    font-size: 13px;
 }
