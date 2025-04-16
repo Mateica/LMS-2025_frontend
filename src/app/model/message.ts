@@ -5,6 +5,7 @@ export interface Message {
     timePublished : Date;
     sender : RegisteredUser;
 	receiver : RegisteredUser;
+    content : string;
 	attachments? : File[];
     active : boolean;
 

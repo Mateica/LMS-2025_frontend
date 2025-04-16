@@ -1,0 +1,37 @@
+<div class="chat-box">
+    <form (submit)="sendMessage(); $event.preventDefault()">
+      <textarea [(ngModel)]="messageContent" name="msg" placeholder="Unesite poruku..."></textarea>
+      <input type="file" (change)="onFileSelected($event)" multiple />
+      <button type="submit">
+        {{ editingMessage ? 'Ažuriraj' : 'Pošalji' }}
+      </button>
+      @if (editingMessage) {
+        <button type="button" (click)="resetForm()">Otkaži</button>
+      }
+    </form>
+  
+    @for (message of messages; track message.id) {
+      <div class="message">
+        <div [innerHTML]="renderMarkdown(message.content)"></div>
+  
+        @if (message.attachments?.length) {
+          <div class="attachments">
+            @for (file of message.attachments; track file.url) {
+              <div>
+                📎 <a [href]="file.url" target="_blank">{{ file.url }}</a>
+              </div>
+            }
+          </div>
+        }
+  
+        @if (message.sender.id === sender.id) {
+          <div class="controls">
+            <button (click)="editMessage(message)">✏️ Izmeni</button>
+            <button (click)="deleteMessage(message.id)">🗑️ Obriši</button>
+          </div>
+        }
+      </div>
+    }
+  </div>
+  
+  
