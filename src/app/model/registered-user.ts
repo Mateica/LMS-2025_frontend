@@ -7,5 +7,6 @@ export interface RegisteredUser {
     password : string;
     email : string;
     forumUsers : ForumUser[];
+    roles : Role[];
     active : boolean;
 }
