@@ -4,6 +4,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { SignupComponent } from './components/pages/signup/signup.component';
 import { AdminComponent } from './components/pages/admin/admin.component';
 import { RoleTableComponent } from './components/tables/role-table/role-table.component';
+import { RoleFormComponent } from './components/forms/role-form/role-form.component';
 
 export const routes: Routes = [
     {
@@ -21,5 +22,8 @@ export const routes: Routes = [
     },
     {
         path: 'roles', component : RoleTableComponent
+    },
+    {
+        path: 'roleForm', component : RoleFormComponent
     }
 ];
