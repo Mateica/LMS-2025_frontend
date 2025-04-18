@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Account } from '../../../model/account';
 import { Router } from '@angular/router';
-import { AccountService } from '../../../service/account.service';
+import { AccountService } from '../../../service/account/account.service';
 
 @Component({
   selector: 'app-account-form',

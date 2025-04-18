@@ -5,6 +5,8 @@ import { SignupComponent } from './components/pages/signup/signup.component';
 import { AdminComponent } from './components/pages/admin/admin.component';
 import { RoleTableComponent } from './components/tables/role-table/role-table.component';
 import { RoleFormComponent } from './components/forms/role-form/role-form.component';
+import { AccountTableComponent } from './components/tables/account-table/account-table.component';
+import { AccountFormComponent } from './components/forms/account-form/account-form.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +27,11 @@ export const routes: Routes = [
     },
     {
         path: 'roleForm', component : RoleFormComponent
+    },
+    {
+        path: 'accounts', component : AccountTableComponent
+    },
+    {
+        path: 'accountForm', component : AccountFormComponent
     }
 ];
