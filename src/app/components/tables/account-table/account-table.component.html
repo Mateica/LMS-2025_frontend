@@ -1,0 +1,23 @@
+<table class="styled-table">
+    <thead>
+      <tr>
+        @for(c of columns; track $index){
+        <th>{{c}}</th>
+        }
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(account of data; track account.id){
+      <tr>
+        <td>{{ account.email }}</td>
+        <td>{{ account.username }}</td>
+        <td>{{ account.password }}</td>
+        <td>
+          <button class="btn update-btn" (click)="onUpdate(account)">Update</button>
+          <button class="btn delete-btn" (click)="onDelete(account)">Delete</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
