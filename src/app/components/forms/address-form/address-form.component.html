@@ -1,0 +1,15 @@
+<div class="address-card">
+    <div class="card-title">
+        <h1>Create Address</h1>
+    </div>
+    <form class="form-group" [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="street" placeholder="Street" formControlName="street">
+        <input type="number" name="houseNumber" placeholder="houseNumber" formControlName="houseNumber">
+        <select name="place" id="place">
+            @for(place of places; track $index){
+                <option [value]="place">{{place.name}}</option>
+            }
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</div>

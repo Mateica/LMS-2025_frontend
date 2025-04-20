@@ -5,5 +5,5 @@ export interface Address {
     street : string;
 	houseNumber : number;
     place : Place;
-    active : boolean;
+    active? : boolean;
 }
