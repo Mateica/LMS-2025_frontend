@@ -13,9 +13,7 @@ import { RegisteredUser } from '../../../model/registered-user';
 })
 export class SignupComponent {
   public signupForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    dateOfBirth : new FormControl(new Date(), [Validators.required]),
+    username: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })
@@ -26,14 +24,14 @@ export class SignupComponent {
     if (this.signupForm.valid) {
       console.log(this.signupForm.value);
 
-      const {firstName = '', lastName = '', dateOfBirth, email = '', password = ''} = this.signupForm.value;
+      const {username = '', email = '', password = ''} = this.signupForm.value;
 
-      if(firstName === '' || lastName === '' || email === '' || password === ''){
+      if(username === '' || email === '' || password === ''){
         alert("Signup error!");
         return;
       }
 
-      const signupCredentials : SignupCredentials = {firstName : firstName ?? '', lastName : lastName ?? '', dateOfBirth : dateOfBirth ?? new Date(), email : email ?? '', password : password ?? ''};
+      const signupCredentials : RegisteredUser = {username : username ?? '', email : email ?? '', password : password ?? ''};
       this.service.signUp(signupCredentials)
         .subscribe({
           next: (data: RegisteredUser) => {
