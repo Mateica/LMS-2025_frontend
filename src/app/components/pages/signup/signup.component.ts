@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 import { SignupCredentials } from '../../../model/user-credentials';
 import { RegisteredUser } from '../../../model/registered-user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +19,7 @@ export class SignupComponent {
     password: new FormControl('', [Validators.required])
   })
 
-  constructor(private service : AuthService, private router : Router){}
+  constructor(private service : AuthService, private router : Router, private toaster : ToastrService){}
 
   public onSubmit() {
     if (this.signupForm.valid) {
@@ -38,7 +39,9 @@ export class SignupComponent {
             console.log(data);
             this.router.navigate(['/login']);
           },
-          error: (err) => console.log(err)
+          error: (err) => {
+            this.toaster.error("Greska");
+          }
         });
     }
   }

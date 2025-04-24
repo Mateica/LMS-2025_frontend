@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private http : HttpClient) { }
 
   signUp(credentials : RegisteredUser) : Observable<RegisteredUser>{
-    return this.http.post<RegisteredUser>(`${environment.baseUrl}/signup`, credentials);
+    return this.http.post<RegisteredUser>(`${environment.baseUrl}/auth/register`, credentials);
   }
 
   login(credentials : UserCredentials) : Observable<LoginResponse>{
