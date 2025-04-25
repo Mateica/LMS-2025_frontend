@@ -1,0 +1,9 @@
+<div class="evaluation-type-card">
+    <div class="card-title">
+        <h1>Create Evaluation Type</h1>
+    </div>
+    <form class="form-group" [formGroup]="evaluationTypeForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="name" placeholder="Role name" formControlName="name">
+        <input type="submit" value="Submit">
+    </form>
+</div>
