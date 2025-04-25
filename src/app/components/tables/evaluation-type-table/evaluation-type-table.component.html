@@ -1,0 +1,19 @@
+<table class="styled-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(evaluationType of data; track evaluationType.id){
+      <tr>
+        <td>{{ evaluationType.name }}</td>
+        <td>
+          <button class="btn update-btn" (click)="onUpdate(evaluationType)">Update</button>
+          <button class="btn delete-btn" (click)="onDelete(evaluationType)">Delete</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>

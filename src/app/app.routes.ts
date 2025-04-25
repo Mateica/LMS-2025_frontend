@@ -7,6 +7,8 @@ import { RoleTableComponent } from './components/tables/role-table/role-table.co
 import { RoleFormComponent } from './components/forms/role-form/role-form.component';
 import { AccountTableComponent } from './components/tables/account-table/account-table.component';
 import { AccountFormComponent } from './components/forms/account-form/account-form.component';
+import { EvaluationTypeTableComponent } from './components/tables/evaluation-type-table/evaluation-type-table.component';
+import { EvaluationTypeFormComponent } from './components/forms/evaluation-type-form/evaluation-type-form.component';
 
 export const routes: Routes = [
     {
@@ -33,5 +35,12 @@ export const routes: Routes = [
     },
     {
         path: 'accountForm', component : AccountFormComponent
-    }
+    },
+    {
+        path: 'evaluationTypes', component : EvaluationTypeTableComponent
+    },
+    {
+        path: 'evaluationTypeForm', component : EvaluationTypeFormComponent
+    },
+
 ];
