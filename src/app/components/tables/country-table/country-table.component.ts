@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Country } from '../../../model/country';
@@ -14,6 +14,8 @@ import { CountryService } from '../../../service/country/country.service';
 export class CountryTableComponent {
   columns: string[] = ["Name", "Places"];
   dataSource: MatTableDataSource<Country> = new MatTableDataSource<Country>();
+
+  @Input()
   data : Country[] = [];
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;

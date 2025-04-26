@@ -1,1 +1,8 @@
-<p>country-wrapper works!</p>
+<app-country-form
+(submitEvent)="createCountry($event)"
+></app-country-form>
+<app-country-table
+[data]="countries"
+(updateEvent)="setCountry($event)"
+(deleteEvent)="deleteCountry($event)"
+></app-country-table>

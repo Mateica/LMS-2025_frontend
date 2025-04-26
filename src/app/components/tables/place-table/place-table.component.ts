@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Place } from '../../../model/place';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,6 +14,7 @@ import { PlaceService } from '../../../service/place/place.service';
 export class PlaceTableComponent {
   columns: string[] = ["Name", "Country"];
   dataSource: MatTableDataSource<Place> = new MatTableDataSource<Place>();
+  @Input()
   data : Place[] = [];
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;

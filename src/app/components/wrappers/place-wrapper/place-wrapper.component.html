@@ -1,1 +1,8 @@
-<p>place-wrapper works!</p>
+<app-place-form
+(submitEvent)="createPlace($event)"
+></app-place-form>
+<app-place-table
+[data]="places"
+(updateEvent)="setPlace($event)"
+(deleteEvent)="deletePlace($event)"
+></app-place-table>

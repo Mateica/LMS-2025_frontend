@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 import { Place } from '../../../model/place';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Country } from '../../../model/country';
@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class CountryFormComponent {
   places : Place[] = [];
+
+    @Input()
     public countryForm = new FormGroup({
         name : new FormControl('',[Validators.required]),
       });

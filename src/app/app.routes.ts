@@ -9,6 +9,12 @@ import { AccountTableComponent } from './components/tables/account-table/account
 import { AccountFormComponent } from './components/forms/account-form/account-form.component';
 import { EvaluationTypeTableComponent } from './components/tables/evaluation-type-table/evaluation-type-table.component';
 import { EvaluationTypeFormComponent } from './components/forms/evaluation-type-form/evaluation-type-form.component';
+import { PlaceWrapperComponent } from './components/wrappers/place-wrapper/place-wrapper.component';
+import { CountryWrapperComponent } from './components/wrappers/country-wrapper/country-wrapper.component';
+import { PlaceTableComponent } from './components/tables/place-table/place-table.component';
+import { CountryTableComponent } from './components/tables/country-table/country-table.component';
+import { PlaceFormComponent } from './components/forms/place-form/place-form.component';
+import { CountryFormComponent } from './components/forms/country-form/country-form.component';
 
 export const routes: Routes = [
     {
@@ -42,5 +48,16 @@ export const routes: Routes = [
     {
         path: 'evaluationTypeForm', component : EvaluationTypeFormComponent
     },
-
+    {
+        path: 'places', component : PlaceTableComponent
+    },
+    {
+        path: 'placeForm', component : PlaceFormComponent
+    },
+    {
+        path: 'countries', component : CountryTableComponent
+    },
+    {
+        path: 'countryForm', component : CountryFormComponent
+    },
 ];
