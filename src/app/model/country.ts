@@ -1,8 +1,8 @@
 import { Place } from "./place"
 
 export interface Country {
-    id : number;
+    id? : number;
     name : string;
-    places : Place[];
-    active : boolean;
+    places? : Place[];
+    active? : boolean;
 }

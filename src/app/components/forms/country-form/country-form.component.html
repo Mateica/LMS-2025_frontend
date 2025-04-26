@@ -1,0 +1,14 @@
+<div class="country-card">
+    <div class="card-title">
+        <h1>Create Country</h1>
+    </div>
+    <form class="form-group" [formGroup]="countryForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="name" placeholder="Name" formControlName="name">
+        <select name="place" id="place">
+            @for(place of places; track $index){
+                <option [value]="place">{{place.name}}</option>
+            }
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</div>

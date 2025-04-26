@@ -1,0 +1,24 @@
+<table class="styled-table">
+    <thead>
+        <tr>
+            @for(c of columns; track $index){
+            <th>{{c}}</th>
+            }
+            <th>Options</th>
+          </tr>
+    </thead>
+    <tbody>
+    @for(country of data; track country.id){
+      <tr>
+        <td>{{ country.name }}</td>
+        @for(place of country.places; track $index){
+            <td>{{place.name}}</td>
+        }
+        <td>
+          <button class="btn update-btn" (click)="onUpdate(country)">Update</button>
+          <button class="btn delete-btn" (click)="onDelete(country)">Delete</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+</table>
