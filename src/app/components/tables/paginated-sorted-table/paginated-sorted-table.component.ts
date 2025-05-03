@@ -14,29 +14,33 @@ import { RoleService } from '../../../service/role/role.service';
   styleUrl: './paginated-sorted-table.component.css'
 })
 export class PaginatedSortedTableComponent {
-  columns: string[] = ["Name"];
-  dataSource: MatTableDataSource<Role> = new MatTableDataSource<Role>();
-  roles: Role[] = [];
-
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort!: MatSort;
-
-  constructor(private service: RoleService) {
-    this.service.getAll().subscribe(r => {
-      this.roles = r;
-      this.dataSource.data = this.roles;
+  displayedColumns: string[] = ['Name'];
+  dataSource!: MatTableDataSource<Role>;
+  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  
+  constructor(private service: RoleService) {}
+  
+  ngAfterViewInit() {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+  
+  ngOnInit() {
+    this.service.getAll().subscribe(roles => {
+      this.dataSource = new MatTableDataSource(roles);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
+  
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

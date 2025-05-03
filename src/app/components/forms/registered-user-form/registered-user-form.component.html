@@ -1,0 +1,16 @@
+<div class="user-card">
+    <div class="card-title">
+        <h1>Create User</h1>
+    </div>
+    <form class="form-group" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="username" placeholder="Username" formControlName="username">
+        <input type="email" name="email" placeholder="Email" formControlName="email">
+        <input type="password" name="password" placeholder="Password" formControlName="password">
+        <select name="roles" id="roles">
+            @for(role of roles; track role.id){
+                <option value="role">{{role.name}}</option>
+            }
+        </select>
+        <input type="submit" value="Signup">
+    </form>
+</div>
