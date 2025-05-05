@@ -1,8 +1,10 @@
-import { Teacher } from "./teacher"
+import { Title } from "./title";
+
+
 
 export interface ScientificField {
     id : number;
     name : string;
-    teacher : Teacher;
+    titles? : Title[];
     active : boolean;
 }
