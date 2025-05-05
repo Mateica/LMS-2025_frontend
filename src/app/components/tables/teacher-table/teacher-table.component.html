@@ -1,0 +1,32 @@
+<table class="styled-table">
+    <thead>
+      <tr>
+        @for(c of columns; track $index){
+            <th>{{c}}</th>
+        }
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(t of data; track t.id){
+      <tr>
+        <td>{{ t.user?.email }}</td>
+        <td>{{ t.user?.username }}</td>
+        <td>{{ t.firstName }}</td>
+        <td>{{ t.lastName }}</td>
+        <td>{{ t.umcn }}</td>
+        <td>{{ t.biography }}</td>
+        @for (item of t.titles; track $index) {
+            <td>{{item}}</td>
+        }
+        <td>{{t.teachingMaterial?.name}}</td>
+        <td>{{t.department?.name}}</td>
+        <td>
+          <button class="btn update-btn" (click)="onUpdate(t)">Update</button>
+          <button class="btn delete-btn" (click)="onDelete(t)">Delete</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+</table>
+
