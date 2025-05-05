@@ -1,0 +1,30 @@
+<div class="teacher-card">
+    <div class="card-title">
+        <h1>Create / Edit Teacher</h1>
+    </div>
+    <form class="form-group" [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="username" placeholder="Username" formControlName="username">
+        <input type="email" name="email" placeholder="Email" formControlName="email">
+        <input type="password" name="password" placeholder="Password" formControlName="password">
+        <input type="text" name="firstName" placeholder="First name" formControlName="firstName">
+        <input type="text" name="lastName" placeholder="Last name" formControlName="lastName">
+        <input type="text" name="umcn" placeholder="UMCN" formControlName="umcn">
+        <input type="text" name="biography" placeholder="Biography" formControlName="biography">
+        <select name="titles" id="titles">
+            @for(title of titles; track title.id){
+                <option value="title">{{title.titleType.name}}</option>
+            }
+        </select>
+        <select name="teachingMaterial" id="teachinMaterial">
+            @for(tm of teachingMaterial; track tm.id){
+                <option value="tm">{{tm.name}} - {{tm.yearOfPublication}}</option>
+            }
+        </select>
+        <select name="departments" id="departments">
+            @for(department of departments; track department.id){
+                <option value="department">{{department.name}} - {{department.faculty.name}}</option>
+            }
+        </select>
+        <input type="submit" value="Signup">
+    </form>
+</div>
