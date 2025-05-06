@@ -32,4 +32,8 @@ export abstract class GenericService<T> {
  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  softDelete(id: number): Observable<T> {
+    return this.http.patch<T>(`${this.apiUrl}/${id}`, { active: false });
+  }
 }
