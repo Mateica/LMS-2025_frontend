@@ -16,8 +16,12 @@ import { CountryTableComponent } from './components/tables/country-table/country
 import { PlaceFormComponent } from './components/forms/place-form/place-form.component';
 import { CountryFormComponent } from './components/forms/country-form/country-form.component';
 import { TeacherFormComponent } from './components/forms/teacher-form/teacher-form.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 export const routes: Routes = [
+    {
+        path:'/', component: HomeComponent
+    },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'
     },
