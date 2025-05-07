@@ -43,7 +43,7 @@ export class CountryWrapperComponent {
 
   deleteCountry(t : Country){
     if(t.id !== undefined){
-      this.service.delete(t.id).subscribe(()=>{
+      this.service.softDelete(t.id).subscribe(()=>{
         this.getAll();
       })
     }else{

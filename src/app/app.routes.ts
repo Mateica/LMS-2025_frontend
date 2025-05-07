@@ -15,6 +15,7 @@ import { PlaceTableComponent } from './components/tables/place-table/place-table
 import { CountryTableComponent } from './components/tables/country-table/country-table.component';
 import { PlaceFormComponent } from './components/forms/place-form/place-form.component';
 import { CountryFormComponent } from './components/forms/country-form/country-form.component';
+import { TeacherFormComponent } from './components/forms/teacher-form/teacher-form.component';
 
 export const routes: Routes = [
     {
@@ -60,4 +61,7 @@ export const routes: Routes = [
     {
         path: 'countryForm', component : CountryFormComponent
     },
+    {
+        path :'teacherForm', component : TeacherFormComponent
+    }
 ];

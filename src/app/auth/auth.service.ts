@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   login(credentials : UserCredentials) : Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${environment.baseUrl}/login`, credentials)
+    return this.http.post<LoginResponse>(`${environment.baseUrl}/auth/login`, credentials)
       .pipe(tap((result) => {
         localStorage.setItem('authUser', JSON.stringify(result));
       }));

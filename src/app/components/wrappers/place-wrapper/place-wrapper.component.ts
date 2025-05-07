@@ -43,7 +43,7 @@ export class PlaceWrapperComponent {
   
     deletePlace(t : Place){
       if(t.id !== undefined){
-        this.service.delete(t.id).subscribe(()=>{
+        this.service.softDelete(t.id).subscribe(()=>{
           this.getAll();
         })
       }else{

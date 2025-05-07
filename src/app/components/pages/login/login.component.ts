@@ -36,16 +36,17 @@ export class LoginComponent {
 
       this.service.login(userCredentials)
       .subscribe((data: LoginResponse) => {
-        if(this.service.isLoggedIn()){
-          if(data.role === 'admin'){
-          this.router.navigate(['/admin']);
-          }
-          else if(data.role === 'student'){
-            this.router.navigate(['/student']);
-          }else{
-            this.router.navigate(['/home']);
-          }
-        }
+        this.router.navigate(["/home"]);
+        // if(this.service.isLoggedIn()){
+        //   // if(data.role === 'admin'){
+        //   // this.router.navigate(['/admin']);
+        //   // }
+        //   // else if(data.role === 'student'){
+        //   //   this.router.navigate(['/student']);
+        //   // }else{
+        //   //   this.router.navigate(['/home']);
+        //   // }
+        // }
         console.log(data);
       });
     }
