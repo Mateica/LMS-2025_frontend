@@ -1,0 +1,13 @@
+<p>teacher-page works!</p>
+<mat-toolbar color="primary">
+    <span>Teacher Page</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="navigateTo('login')">Login</button>
+    <button mat-raised-button color="accent" (click)="navigateTo('register')">Register</button>
+    <a class="active" routerLink="/home">Home</a>
+    <a routerLink="/studentSearch">Search Students</a>
+    <a routerLink="/students">My Students</a>
+    <a routerLink="/outcomeSheet">Outcome Sheet</a>
+    <a routerLink="/subjects">Subjects</a>
+    <a routerLink="/grades">Grades</a>
+</mat-toolbar>
