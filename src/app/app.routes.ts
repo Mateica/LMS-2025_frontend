@@ -17,6 +17,8 @@ import { PlaceFormComponent } from './components/forms/place-form/place-form.com
 import { CountryFormComponent } from './components/forms/country-form/country-form.component';
 import { TeacherFormComponent } from './components/forms/teacher-form/teacher-form.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { EvaluationInstrumentTableComponent } from './components/tables/evaluation-instrument-table/evaluation-instrument-table.component';
+import { EvaluationInstrumentFormComponent } from './components/forms/evaluation-instrument-form/evaluation-instrument-form.component';
 
 export const routes: Routes = [
     {
@@ -53,6 +55,13 @@ export const routes: Routes = [
     {
         path: 'evaluationTypeForm', component : EvaluationTypeFormComponent
     },
+    {
+        path: 'evaluationInstruments', component : EvaluationInstrumentTableComponent
+    },
+    {
+        path: 'evaluationInstrumentForm', component : EvaluationInstrumentFormComponent
+    },
+
     {
         path: 'places', component : PlaceTableComponent
     },

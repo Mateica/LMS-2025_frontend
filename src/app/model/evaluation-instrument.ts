@@ -1,5 +1,6 @@
 export interface EvaluationInstrument {
-	id : number;
-	file : File;
-	active : boolean;
+	id? : number;
+	name : string;
+	file? : File;
+	active? : boolean;
 }

@@ -1,0 +1,22 @@
+<p>evaluation-instrument-table works!</p>
+<table class="styled-table">
+    <thead>
+        <tr>
+            @for(c of columns; track $index){
+            <th>{{c}}</th>
+            }
+            <th>Options</th>
+          </tr>
+    </thead>
+    <tbody>
+    @for(ei of data; track ei.id){
+      <tr>
+        <td>{{ ei.name }}</td>
+        <td>
+          <button class="btn update-btn" (click)="onUpdate(ei)">Update</button>
+          <button class="btn delete-btn" (click)="onDelete(ei)">Delete</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+</table>

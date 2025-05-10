@@ -1,0 +1,15 @@
+<div class="country-card">
+    <div class="card-title">
+        <h1>Create Evaluation Instrument</h1>
+    </div>
+    <form class="form-group" [formGroup]="evaluationInstrumentForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="name" placeholder="Name" formControlName="name">
+        <select name="file" id="file">
+            @for(file of files; track $index){
+                <option [value]="file">{{file.url}} {{file.description}}</option>
+            }
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
