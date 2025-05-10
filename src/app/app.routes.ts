@@ -19,6 +19,8 @@ import { TeacherFormComponent } from './components/forms/teacher-form/teacher-fo
 import { HomeComponent } from './components/pages/home/home.component';
 import { EvaluationInstrumentTableComponent } from './components/tables/evaluation-instrument-table/evaluation-instrument-table.component';
 import { EvaluationInstrumentFormComponent } from './components/forms/evaluation-instrument-form/evaluation-instrument-form.component';
+import { OutcomeTableComponent } from './components/tables/outcome-table/outcome-table.component';
+import { OutcomeFormComponent } from './components/forms/outcome-form/outcome-form.component';
 
 export const routes: Routes = [
     {
@@ -61,7 +63,12 @@ export const routes: Routes = [
     {
         path: 'evaluationInstrumentForm', component : EvaluationInstrumentFormComponent
     },
-
+    {
+        path: 'syllabi', component : OutcomeTableComponent
+    },
+    {
+        path: 'syllabusForm', component : OutcomeFormComponent
+    },
     {
         path: 'places', component : PlaceTableComponent
     },

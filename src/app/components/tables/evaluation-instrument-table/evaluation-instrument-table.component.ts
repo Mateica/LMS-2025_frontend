@@ -12,7 +12,7 @@ import { EvaluationInstrumentService } from '../../../service/evaluation-instrum
   styleUrl: './evaluation-instrument-table.component.css'
 })
 export class EvaluationInstrumentTableComponent {
-  columns: string[] = ["Name", "Places"];
+  columns: string[] = ["Name", "File"];
   dataSource: MatTableDataSource<EvaluationInstrument> = new MatTableDataSource<EvaluationInstrument>();
 
   @Input()

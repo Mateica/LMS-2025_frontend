@@ -1,0 +1,30 @@
+<p>outcome-form works!</p>
+<div class="syllabus-card">
+    <div class="card-title">
+        <h1>Create or edit Syllabus</h1>
+    </div>
+    <form class="form-group" [formGroup]="syllabusForm" (ngSubmit)="onSubmit()">
+        <input type="text" name="name" placeholder="Name" formControlName="name">
+        <input type="text" name="description" placeholder="Description" formControlName="description">
+        <select name="educationGoal" id="educationGoal">
+            @for(educationGoal of educationGoals; track $index){
+                <option [value]="educationGoal">{{educationGoal.description}} </option>
+            }
+        </select>
+        <select name="teachingMaterial" id="teachingMaterial">
+            @for(teachingMaterial of teachingMaterials; track $index){
+                @if(teachingMaterial.authors){
+                    @for(author of teachingMaterial.authors; track $index){
+                        <option [value]="teachingMaterial">{{teachingMaterial.name}} {{author.firstName}} {{author.lastName}} {{teachingMaterial.yearOfPublication}} </option>
+                    }
+                }
+            }
+        </select>
+        <select name="subjects" id="subjects">
+            @for(subject of subjects; track $index){
+                <option [value]="subject">{{subject.name}} </option>
+            }
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</div>
