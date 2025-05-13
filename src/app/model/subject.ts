@@ -1,4 +1,5 @@
 import { Outcome } from "./outcome"
+import { SubjectRealization } from "./subject-realization";
 import { YearOfStudy } from "./year-of-study"
 
 export interface Subject {
@@ -14,5 +15,6 @@ export interface Subject {
     numberOfSemesters : number; 
 	yearOfStudy : YearOfStudy;
     outcome : Outcome;
+	subjectRealizations : SubjectRealization[];
 	prerequisite? : Subject; // Mozda 1 : *?
 }
