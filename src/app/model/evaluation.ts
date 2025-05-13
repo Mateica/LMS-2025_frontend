@@ -2,15 +2,16 @@ import { EvaluationInstrument } from "./evaluation-instrument"
 import { EvaluationType } from "./evaluation-type"
 import { Examination } from "./examination"
 import { Outcome } from "./outcome"
+import { SubjectRealization } from "./subject-realization"
 
 export interface Evaluation {
-    id : number;
+    id? : number;
 	startTime : Date;
 	endTime : Date;
 	numberOfPoints : number;
-	outcome : Outcome;
-	evaluationType : EvaluationType;
-	evaluationInstrument : EvaluationInstrument;
-	examination : Examination;
+	evaluationType? : EvaluationType;
+	evaluationInstrument? : EvaluationInstrument;
+	examination? : Examination;
+	subjectRealization? : SubjectRealization;
 	active : boolean;
 }

@@ -1,12 +1,14 @@
+import { File } from "./file";
 import { ForumUser } from "./forum-user";
+import { SubjectRealization } from "./subject-realization";
 import { Topic } from "./topic";
 
 export interface Announcement {
-    id : number;
-    datePublished : Date;
+    id? : number;
+	timePublished : Date;
 	content : string;
-	author? : ForumUser;
-	attachments? : File[];
-	topic : Topic;
+	subjectRealization : SubjectRealization;
+	title : string;
+	attachments : File[];
 	active : boolean;
 }
