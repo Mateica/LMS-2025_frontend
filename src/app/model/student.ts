@@ -12,7 +12,7 @@ export interface Student {
     indexNumber : string;
     address : Address;
     studentOnYear : StudentOnYear;
-    subjectAttendance : SubjectAttendance;
+    subjectAttendances : SubjectAttendance[];
     active : boolean;
 
 }
