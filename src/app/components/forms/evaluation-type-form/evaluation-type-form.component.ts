@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EvaluationType } from '../../../model/evaluation-type';
 import { Router } from '@angular/router';
@@ -11,6 +11,9 @@ import { EvaluationTypeService } from '../../../service/evaluation-type/evaluati
   styleUrl: './evaluation-type-form.component.css'
 })
 export class EvaluationTypeFormComponent {
+  @Input()
+  evaluationType : EvaluationType | null = null;
+  
   public evaluationTypeForm = new FormGroup({
       name : new FormControl('',[Validators.required]),
     });
