@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { EvaluationType } from '../../../model/evaluation-type';
@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 export class EvaluationTypeTableComponent {
   columns: string[] = ["Name"];
   dataSource: MatTableDataSource<EvaluationType> = new MatTableDataSource<EvaluationType>();
+
+  @Input()
   data : EvaluationType[] = [];
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;

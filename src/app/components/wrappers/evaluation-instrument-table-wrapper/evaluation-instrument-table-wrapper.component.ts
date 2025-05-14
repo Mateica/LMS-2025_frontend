@@ -22,7 +22,7 @@ export class EvaluationInstrumentTableWrapperComponent {
     }
   
     updateEvaluationInstrument(t : EvaluationInstrument){
-      this.router.navigate(["/roleForm"]);
+      this.router.navigate(["/evaluationInstrumentForm"]);
     }
   
     deleteEvaluationInstrument(t : EvaluationInstrument){

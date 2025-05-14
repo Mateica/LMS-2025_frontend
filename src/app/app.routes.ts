@@ -25,6 +25,8 @@ import { RoleFormWrapperComponent } from './components/wrappers/role-form-wrappe
 import { RoleTableWrapperComponent } from './components/wrappers/role-table-wrapper/role-table-wrapper.component';
 import { EvaluationInstrumentTableWrapperComponent } from './components/wrappers/evaluation-instrument-table-wrapper/evaluation-instrument-table-wrapper.component';
 import { EvaluationInstrumentFormWrapperComponent } from './components/wrappers/evaluation-instrument-form-wrapper/evaluation-instrument-form-wrapper.component';
+import { EvaluationTypeTableWrapperComponent } from './components/wrappers/evaluation-type-table-wrapper/evaluation-type-table-wrapper.component';
+import { EvaluationTypeFormWrapperComponent } from './components/wrappers/evaluation-type-form-wrapper/evaluation-type-form-wrapper.component';
 
 export const routes: Routes = [
     {
@@ -56,10 +58,10 @@ export const routes: Routes = [
         path: 'accountForm', component : AccountFormComponent
     },
     {
-        path: 'evaluationTypes', component : EvaluationTypeTableComponent
+        path: 'evaluationTypes', component : EvaluationTypeTableWrapperComponent
     },
     {
-        path: 'evaluationTypeForm', component : EvaluationTypeFormComponent
+        path: 'evaluationTypeForm', component : EvaluationTypeFormWrapperComponent
     },
     {
         path: 'evaluationInstruments', component : EvaluationInstrumentTableWrapperComponent
