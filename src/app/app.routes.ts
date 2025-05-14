@@ -21,6 +21,8 @@ import { EvaluationInstrumentTableComponent } from './components/tables/evaluati
 import { EvaluationInstrumentFormComponent } from './components/forms/evaluation-instrument-form/evaluation-instrument-form.component';
 import { OutcomeTableComponent } from './components/tables/outcome-table/outcome-table.component';
 import { OutcomeFormComponent } from './components/forms/outcome-form/outcome-form.component';
+import { RoleFormWrapperComponent } from './components/wrappers/role-form-wrapper/role-form-wrapper.component';
+import { RoleTableWrapperComponent } from './components/wrappers/role-table-wrapper/role-table-wrapper.component';
 
 export const routes: Routes = [
     {
@@ -40,10 +42,10 @@ export const routes: Routes = [
         path: 'admin', component: AdminComponent, canActivate: [authGuard]
     },
     {
-        path: 'roles', component : RoleTableComponent
+        path: 'roles', component : RoleTableWrapperComponent, canActivate: [authGuard]
     },
     {
-        path: 'roleForm', component : RoleFormComponent
+        path: 'roleForm', component : RoleFormWrapperComponent, canActivate: [authGuard]
     },
     {
         path: 'accounts', component : AccountTableComponent

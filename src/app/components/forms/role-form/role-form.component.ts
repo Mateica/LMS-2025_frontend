@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RoleService } from '../../../service/role/role.service';
 import { Router, RouterModule } from '@angular/router';
@@ -11,6 +11,8 @@ import { Role } from '../../../model/role';
   styleUrl: './role-form.component.css'
 })
 export class RoleFormComponent {
+  @Input()
+  role : Role | null = null;
   public roleForm = new FormGroup({
     name : new FormControl('',[Validators.required]),
   });
