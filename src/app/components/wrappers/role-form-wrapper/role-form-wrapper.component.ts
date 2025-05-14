@@ -23,7 +23,7 @@ export class RoleFormWrapperComponent {
   }
 
    createRole(t : Role){
-    if(t.id === undefined){
+    if(t.id !== undefined){
       this.service.update(t.id, t).subscribe(()=>{
         this.getAll();
         this.router.navigate(["/"]);

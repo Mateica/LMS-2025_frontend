@@ -23,6 +23,8 @@ import { OutcomeTableComponent } from './components/tables/outcome-table/outcome
 import { OutcomeFormComponent } from './components/forms/outcome-form/outcome-form.component';
 import { RoleFormWrapperComponent } from './components/wrappers/role-form-wrapper/role-form-wrapper.component';
 import { RoleTableWrapperComponent } from './components/wrappers/role-table-wrapper/role-table-wrapper.component';
+import { EvaluationInstrumentTableWrapperComponent } from './components/wrappers/evaluation-instrument-table-wrapper/evaluation-instrument-table-wrapper.component';
+import { EvaluationInstrumentFormWrapperComponent } from './components/wrappers/evaluation-instrument-form-wrapper/evaluation-instrument-form-wrapper.component';
 
 export const routes: Routes = [
     {
@@ -48,7 +50,7 @@ export const routes: Routes = [
         path: 'roleForm', component : RoleFormWrapperComponent, canActivate: [authGuard]
     },
     {
-        path: 'accounts', component : AccountTableComponent
+        path: 'accounts', component : AccountTableComponent, canActivate : [authGuard]
     },
     {
         path: 'accountForm', component : AccountFormComponent
@@ -60,10 +62,10 @@ export const routes: Routes = [
         path: 'evaluationTypeForm', component : EvaluationTypeFormComponent
     },
     {
-        path: 'evaluationInstruments', component : EvaluationInstrumentTableComponent
+        path: 'evaluationInstruments', component : EvaluationInstrumentTableWrapperComponent
     },
     {
-        path: 'evaluationInstrumentForm', component : EvaluationInstrumentFormComponent
+        path: 'evaluationInstrumentForm', component : EvaluationInstrumentFormWrapperComponent
     },
     {
         path: 'syllabi', component : OutcomeTableComponent

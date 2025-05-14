@@ -13,6 +13,8 @@ import { File } from '../../../model/file';
   styleUrl: './evaluation-instrument-form.component.css'
 })
 export class EvaluationInstrumentFormComponent {
+  @Input()
+  evaluationInstrument : EvaluationInstrument | null = null;
   files : File[] = [];
   
     @Input()
