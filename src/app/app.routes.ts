@@ -27,6 +27,8 @@ import { EvaluationInstrumentTableWrapperComponent } from './components/wrappers
 import { EvaluationInstrumentFormWrapperComponent } from './components/wrappers/evaluation-instrument-form-wrapper/evaluation-instrument-form-wrapper.component';
 import { EvaluationTypeTableWrapperComponent } from './components/wrappers/evaluation-type-table-wrapper/evaluation-type-table-wrapper.component';
 import { EvaluationTypeFormWrapperComponent } from './components/wrappers/evaluation-type-form-wrapper/evaluation-type-form-wrapper.component';
+import { OutcomeFormWrapperComponent } from './components/wrappers/outcome-form-wrapper/outcome-form-wrapper.component';
+import { OutomeTableWrapperComponent } from './components/wrappers/outome-table-wrapper/outome-table-wrapper.component';
 
 export const routes: Routes = [
     {
@@ -70,10 +72,10 @@ export const routes: Routes = [
         path: 'evaluationInstrumentForm', component : EvaluationInstrumentFormWrapperComponent
     },
     {
-        path: 'syllabi', component : OutcomeTableComponent
+        path: 'syllabi', component : OutomeTableWrapperComponent
     },
     {
-        path: 'syllabusForm', component : OutcomeFormComponent
+        path: 'syllabusForm', component : OutcomeFormWrapperComponent
     },
     {
         path: 'places', component : PlaceTableComponent
