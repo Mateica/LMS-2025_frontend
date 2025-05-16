@@ -14,7 +14,7 @@ export interface Subject {
 	classesLeft : number;
     numberOfSemesters : number; 
 	yearOfStudy : YearOfStudy;
-    outcome : Outcome;
+    syllabi : Outcome[];
 	subjectRealizations : SubjectRealization[];
 	prerequisite? : Subject; // Mozda 1 : *?
 }
