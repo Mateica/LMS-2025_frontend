@@ -9,9 +9,8 @@ export interface Student {
     firstName : string;
     lastName : string;
     umcn : string;
-    indexNumber : string;
     address : Address;
-    studentOnYear : StudentOnYear;
+    studentOnYear : StudentOnYear[];
     subjectAttendances : SubjectAttendance[];
     active : boolean;
 

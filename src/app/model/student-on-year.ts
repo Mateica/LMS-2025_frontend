@@ -6,6 +6,7 @@ export interface StudentOnYear {
     id : number;
 	dateOfApplication : Date;
 	student : Student;
+	indexNumber : string;
 	yearOfStudy : YearOfStudy;
 	examinations : Examination[];
 	active : boolean;
