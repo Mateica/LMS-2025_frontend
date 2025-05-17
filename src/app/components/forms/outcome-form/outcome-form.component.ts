@@ -20,6 +20,9 @@ export class OutcomeFormComponent {
   educationGoals : EducationGoal[] = [];
   teachingMaterials : TeachingMaterial[] = [];
   subjects : Subject[] = [];
+
+  @Input()
+  syllabus : Outcome | null = null;
     
   @Input()
   public syllabusForm = new FormGroup({
