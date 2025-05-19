@@ -16,7 +16,22 @@ export class ExportService {
     });
   }
 
+  exportTeachersToXML(t : Teacher[]){
+    return this.http.post('http://localhost:8080/export/xml', t, {
+      responseType: 'text',
+      observe: 'response'
+    });
+  }
+
+
   exportTeacherToPDF(t : Teacher){
+    return this.http.post('http://localhost:8080/export/pdf', t, {
+      responseType: 'blob',
+      observe: 'response'
+    });
+  }
+
+  exportTeachersToPDF(t : Teacher[]){
     return this.http.post('http://localhost:8080/export/pdf', t, {
       responseType: 'blob',
       observe: 'response'
@@ -30,7 +45,22 @@ export class ExportService {
     });
   }
 
+  exportStudentsToXML(t : Student[]){
+    return this.http.post('http://localhost:8080/export/xml', t, {
+      responseType: 'text',
+      observe: 'response'
+    });
+  }
+
+
   exportStudentToPDF(t : Student){
+    return this.http.post('http://localhost:8080/export/pdf', t, {
+      responseType: 'blob',
+      observe: 'response'
+    });
+  }
+
+  exportStudentsToPDF(t : Student[]){
     return this.http.post('http://localhost:8080/export/pdf', t, {
       responseType: 'blob',
       observe: 'response'
