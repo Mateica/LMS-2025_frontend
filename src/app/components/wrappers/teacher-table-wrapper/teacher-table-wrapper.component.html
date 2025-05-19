@@ -1,0 +1,7 @@
+<app-teacher-table
+[data]="teachers"
+(updateEvent)="updateTeacher($event)"
+(exportXMLEvent)="downloadXml($event)"
+(exportPDFEvent)="downloadPdf($event)"
+(deleteEvent)="deleteTeacher($event)"
+></app-teacher-table>
