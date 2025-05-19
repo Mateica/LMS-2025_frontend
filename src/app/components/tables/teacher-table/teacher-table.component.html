@@ -23,6 +23,8 @@
         <td>{{t.department?.name}}</td>
         <td>
           <button class="btn update-btn" (click)="onUpdate(t)">Update</button>
+          <button class="btn update-btn" (click)="onExportXML(t)">Export XML</button>
+          <button class="btn update-btn" (click)="onExportPDF(t)">Export PDF</button>
           <button class="btn delete-btn" (click)="onDelete(t)">Delete</button>
         </td>
       </tr>

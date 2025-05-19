@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Teacher } from '../../../model/teacher';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -26,8 +26,11 @@ export class TeacherTableComponent {
     "Teaching Material",
     "Department"
   ];
+
+  @Input()
   dataSource: MatTableDataSource<Teacher> = new MatTableDataSource<Teacher>();
 
+  @Input()
   data : Teacher[] = [];
   users : RegisteredUser[] = [];
   titles : Title[] = [];
@@ -46,6 +49,12 @@ export class TeacherTableComponent {
 
   @Output()
   updateEvent  = new EventEmitter<Teacher>();
+
+  @Output()
+  exportXMLEvent  = new EventEmitter<Teacher>();
+
+  @Output()
+  exportPDFEvent  = new EventEmitter<Teacher>();
       
   @Output()
   deleteEvent = new EventEmitter<Teacher>();
@@ -56,5 +65,13 @@ export class TeacherTableComponent {
       
   onDelete(t : Teacher){
     this.deleteEvent.emit(t);
+  }
+
+  onExportXML(t : Teacher){
+    this.exportXMLEvent.emit(t);
+  }
+
+  onExportPDF(t : Teacher){
+    this.exportPDFEvent.emit(t);
   }
 }
