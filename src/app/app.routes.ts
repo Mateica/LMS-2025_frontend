@@ -29,6 +29,8 @@ import { EvaluationTypeTableWrapperComponent } from './components/wrappers/evalu
 import { EvaluationTypeFormWrapperComponent } from './components/wrappers/evaluation-type-form-wrapper/evaluation-type-form-wrapper.component';
 import { OutcomeFormWrapperComponent } from './components/wrappers/outcome-form-wrapper/outcome-form-wrapper.component';
 import { OutomeTableWrapperComponent } from './components/wrappers/outome-table-wrapper/outome-table-wrapper.component';
+import { TeacherPageComponent } from './components/pages/teacher-page/teacher-page.component';
+import { StudentServicePageComponent } from './components/pages/student-service-page/student-service-page.component';
 
 export const routes: Routes = [
     {
@@ -48,48 +50,97 @@ export const routes: Routes = [
         path: 'admin', component: AdminComponent, canActivate: [authGuard]
     },
     {
-        path: 'roles', component : RoleTableWrapperComponent, canActivate: [authGuard]
+        path: 'roles', component : RoleTableWrapperComponent, data:{
+            allowedRoles: ["ADMIN"]
+        }, canActivate: [authGuard]
     },
     {
-        path: 'roleForm', component : RoleFormWrapperComponent, canActivate: [authGuard]
+        path: 'roleForm', component : RoleFormWrapperComponent, data:{
+            allowedRoles: ["ADMIN"]
+        }, canActivate: [authGuard]
     },
     {
-        path: 'accounts', component : AccountTableComponent, canActivate : [authGuard]
+        path: 'accounts', component : AccountTableComponent, data:{
+            allowedRoles: ["ADMIN"]
+        }, canActivate : [authGuard]
     },
     {
         path: 'accountForm', component : AccountFormComponent
     },
     {
-        path: 'evaluationTypes', component : EvaluationTypeTableWrapperComponent
+        path: 'evaluationTypes', component : EvaluationTypeTableWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'evaluationTypeForm', component : EvaluationTypeFormWrapperComponent
+        path: 'evaluationTypeForm', component : EvaluationTypeFormWrapperComponent,data:{
+            allowedRoles: ["ADMIN", "TEACHER"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'evaluationInstruments', component : EvaluationInstrumentTableWrapperComponent
+        path: 'evaluationInstruments', component : EvaluationInstrumentTableWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'evaluationInstrumentForm', component : EvaluationInstrumentFormWrapperComponent
+        path: 'evaluationInstrumentForm', component : EvaluationInstrumentFormWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'syllabi', component : OutomeTableWrapperComponent
+        path: 'syllabi', component : OutomeTableWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'syllabusForm', component : OutcomeFormWrapperComponent
+        path: 'syllabusForm', component : OutcomeFormWrapperComponent, data:{
+            allowedRoles: ["ADMIN"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'places', component : PlaceTableComponent
+        path: 'places', component : PlaceTableComponent, data:{
+            allowedRoles: ["ADMIN"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'placeForm', component : PlaceFormComponent
+        path: 'placeForm', component : PlaceFormComponent, data:{
+            allowedRoles: ["ADMIN"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'countries', component : CountryTableComponent
+        path: 'countries', component : CountryTableComponent, data:{
+            allowedRoles: ["ADMIN"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path: 'countryForm', component : CountryFormComponent
+        path: 'countryForm', component : CountryFormComponent, data:{
+            allowedRoles: ["ADMIN"]
+        },
+        canActivate: [authGuard]
     },
     {
-        path :'teacherForm', component : TeacherFormComponent
+        path :'teacherForm', component : TeacherFormComponent, data:{
+            allowedRoles: ["ADMIN"]
+        },
+        canActivate: [authGuard]
+    },
+    {
+        path: 'teacherPage', component : TeacherPageComponent, data:{
+            allowedRoles: ["TEACHER"]
+        }, canActivate: [authGuard]
+    },
+    {
+        path: 'studentServicePage', component: StudentServicePageComponent , data: {
+            allowedRoles: ["ADMIN", "STAFF"]
+        }
     }
 ];

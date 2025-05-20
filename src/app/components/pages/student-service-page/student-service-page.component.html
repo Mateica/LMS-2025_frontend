@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <span>Student Service</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="navigateTo('login')">Login</button>
+    <button mat-raised-button color="accent" (click)="navigateTo('register')">Register</button>
+    <a class="active" routerLink="/home">Home</a>
+    <a routerLink="/documents">Documents</a>
+    <a routerLink="/studentOnYearForm">Enroll students</a>
+    <a routerLink="/examinations">Exam scheduler</a>
+    <a routerLink="/announcementForm">Announcements</a>
+    <a routerLink="/teachingMaterials">Teaching Materials</a>
+    <a routerLink="/officeInventory">Office Inventory</a>
+</mat-toolbar>
+<div>
+    @for(member of staff; track $index){
+        <h1>{{member.firstName}} {{member.lastName}}</h1>
+        <p>{{member.registeredUser?.email}}</p>
+    }
+</div>
+
