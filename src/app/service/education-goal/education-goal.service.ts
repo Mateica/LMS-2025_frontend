@@ -8,6 +8,6 @@ import { EducationGoal } from '../../model/education-goal';
 })
 export class EducationGoalService extends GenericService<EducationGoal>{
   constructor(http : HttpClient) {
-      super(http,"/education-goals")
+      super(http,"/educationGoals")
    }
 }

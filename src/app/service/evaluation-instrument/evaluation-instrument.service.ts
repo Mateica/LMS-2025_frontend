@@ -9,6 +9,6 @@ import { HttpClient } from '@angular/common/http';
 export class EvaluationInstrumentService extends GenericService<EvaluationInstrument>{
 
   constructor(http : HttpClient) {
-    super(http,"/evaluation-instruments");
+    super(http,"/evaluationInstruments");
   }
 }

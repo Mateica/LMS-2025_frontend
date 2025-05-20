@@ -8,6 +8,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisteredUserService extends GenericService<RegisteredUser>{
   constructor(http : HttpClient) { 
-    super(http, "/registered-users");
+    super(http, "/registeredUsers");
   }
 }

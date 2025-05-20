@@ -9,6 +9,6 @@ import { HttpClient } from '@angular/common/http';
 export class StudentOnYearService extends GenericService<StudentOnYear>{
 
   constructor(http : HttpClient) { 
-    super(http,"/students-on-year");
+    super(http,"/studentsOnYear");
   }
 }

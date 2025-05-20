@@ -9,6 +9,6 @@ import { StudyProgramme } from '../../model/study-programme';
 export class StudyProgrammeService extends GenericService<StudyProgramme>{
 
   constructor(http : HttpClient) {
-    super(http,"/study-programmes");
+    super(http,"/studyProgrammes");
   }
 }

@@ -9,6 +9,6 @@ import { TeachingType } from '../../model/teaching-type';
 export class TeachingTypeService extends GenericService<TeachingType>{
 
   constructor(http : HttpClient) { 
-    super(http,"/teaching-types")
+    super(http,"/teachingTypes")
   }
 }

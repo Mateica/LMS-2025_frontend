@@ -9,6 +9,6 @@ import { ClassTerm } from '../../model/class-term';
 export class ClassTermService extends GenericService<ClassTerm>{
 
   constructor(http : HttpClient) {
-      super(http,"/class-terms");
+      super(http,"/classTerms");
    }
 }

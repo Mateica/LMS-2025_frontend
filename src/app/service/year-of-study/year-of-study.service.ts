@@ -9,6 +9,6 @@ import { YearOfStudy } from '../../model/year-of-study';
 export class YearOfStudyService extends GenericService<YearOfStudy> {
 
   constructor(http : HttpClient) {
-    super(http, "/years-of-study")
+    super(http, "/yearsOfStudy")
   }
 }

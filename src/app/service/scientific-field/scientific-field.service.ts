@@ -9,6 +9,6 @@ import { ScientificField } from '../../model/scientific-field';
 export class ScientificFieldService extends GenericService<ScientificField>{
 
   constructor(http : HttpClient) { 
-    super(http, "/scientific-fields");
+    super(http, "/scientificFields");
   }
 }
