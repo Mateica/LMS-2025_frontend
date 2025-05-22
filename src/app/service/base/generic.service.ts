@@ -16,6 +16,10 @@ export abstract class GenericService<T> {
     return this.http.get<T[]>(this.apiUrl);
   }
 
+  getAllActive(): Observable<T[]> {
+    return this.http.get<T[]>(`${this.apiUrl}/active`);
+  }
+
   getById(id : number): Observable<T> {
     return this.http.get<T>(`${this.apiUrl}/${id}`);
   }
