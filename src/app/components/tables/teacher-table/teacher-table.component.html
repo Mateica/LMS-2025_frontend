@@ -1,34 +1,30 @@
-<table class="styled-table">
-    <thead>
-      <tr>
-        @for(c of columns; track $index){
-            <th>{{c}}</th>
-        }
-        <th>Options</th>
-      </tr>
-    </thead>
-    <tbody>
-    @for(t of data; track t.id){
-      <tr>
-        <td>{{ t.user?.email }}</td>
-        <td>{{ t.user?.username }}</td>
-        <td>{{ t.firstName }}</td>
-        <td>{{ t.lastName }}</td>
-        <td>{{ t.umcn }}</td>
-        <td>{{ t.biography }}</td>
-        @for (item of t.titles; track $index) {
-            <td>{{item}}</td>
-        }
-        <td>{{t.teachingMaterial?.name}}</td>
-        <td>{{t.department?.name}}</td>
-        <td>
-          <button class="btn update-btn" (click)="onUpdate(t)">Update</button>
-          <button class="btn update-btn" (click)="onExportXML(t)">Export XML</button>
-          <button class="btn update-btn" (click)="onExportPDF(t)">Export PDF</button>
-          <button class="btn delete-btn" (click)="onDelete(t)">Delete</button>
-        </td>
-      </tr>
-    }
-    </tbody>
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+@for (column of displayedColumns; track column) {
+  @if (column === 'options') {
+    <ng-container [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef> Options </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-button color="primary" (click)="onExportXML(row)">Export XML</button>
+        <button mat-button color="primary" (click)="onExportPDF(row)">Export PDF</button>
+        <button mat-button color="primary" (click)="onUpdate(row)">Update</button>
+        <button mat-button color="warn" (click)="onDelete(row)">Delete</button>
+      </td>
+    </ng-container>
+  } @else {
+    <ng-container [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column | titlecase }} </th>
+      <td mat-cell *matCellDef="let row"> {{ row[column] }} </td>
+    </ng-container>
+  }
+}
 </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of teachers"></mat-paginator>
+</div>
 

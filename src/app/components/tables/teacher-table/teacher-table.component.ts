@@ -1,21 +1,31 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Teacher } from '../../../model/teacher';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TeacherService } from '../../../service/teacher/teacher.service';
 import { RegisteredUser } from '../../../model/registered-user';
 import { TeachingMaterial } from '../../../model/teaching-material';
 import { Title } from '../../../model/title';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+import { RegisteredUserService } from '../../../service/registered-user/registered-user.service';
+import { TitleService } from '../../../service/title/title.service';
+import { Router } from '@angular/router';
+import { TeacherOnRealization } from '../../../model/teacher-on-realization';
+import { TeacherOnRealizationService } from '../../../service/teacher-on-realization/teacher-on-realization.service';
+import { TeachingMaterialService } from '../../../service/teaching-material/teaching-material.service';
+import { DepartmentService } from '../../../service/department/department.service';
+import { Department } from '../../../model/department';
 
 @Component({
   selector: 'app-teacher-table',
-  imports: [],
+  imports: [MatFormField, MatLabel, MatPaginator, MatTableModule, CommonModule],
   templateUrl: './teacher-table.component.html',
   styleUrl: './teacher-table.component.css'
 })
 export class TeacherTableComponent {
-  columns: string[] = [
+  displayedColumns: string[] = [
     "Email",
     "Username",
     "First Name",
@@ -24,27 +34,53 @@ export class TeacherTableComponent {
     "Biography",
     "Titles",
     "Teaching Material",
-    "Department"
+    "Department",
+    "Options"
   ];
 
   @Input()
-  dataSource: MatTableDataSource<Teacher> = new MatTableDataSource<Teacher>();
+  dataSource!: MatTableDataSource<Teacher>;
+  
+  userSource! : MatTableDataSource<RegisteredUser>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   @Input()
   data : Teacher[] = [];
   users : RegisteredUser[] = [];
   titles : Title[] = [];
+  teachersOnRealization : TeacherOnRealization[] = [];
+  teachingMaterials : TeachingMaterial[] = [];
+  departments : Department[] = [];
 
-  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-  constructor(private service: TeacherService) {
-     this.service.getAll().subscribe(r => {
-     this.data = r;
-     this.dataSource.data = this.data;
-  });
 
-    this.dataSource.data = this.data;
+  constructor(private teacherService : TeacherService, private userService : RegisteredUserService, private titleService : TitleService, private teacherOnRealizationService : TeacherOnRealizationService,
+    private teachingMaterialService : TeachingMaterialService, private departmentService : DepartmentService, private router : Router){}
+
+  ngAfterViewInit() {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+  
+  ngOnInit() {
+    this.teacherService.getAll().subscribe(t => {
+      this.dataSource = new MatTableDataSource(t);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   @Output()

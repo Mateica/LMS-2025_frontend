@@ -37,7 +37,7 @@ export class SignupComponent {
         .subscribe({
           next: (data: RegisteredUser) => {
             console.log(data);
-            this.router.navigate(['/login']);
+            this.router.navigate(['login']);
           },
           error: (err) => {
             this.toaster.error("Greska");
