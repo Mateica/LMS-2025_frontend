@@ -39,9 +39,10 @@ export class OutcomeTableComponent {
     }
   }
   
-  ngOnInit() {
-    this.service.getAll().subscribe(roles => {
-      this.dataSource = new MatTableDataSource(roles);
+  ngOnInit() { // Dobavljanje aktivnih elemenata - da li je ispravno?
+    this.service.getAll().subscribe(r => {
+      const activeOutcomes = r.filter(o => o.active === true);
+      this.dataSource = new MatTableDataSource(activeOutcomes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

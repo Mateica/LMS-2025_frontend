@@ -1,0 +1,11 @@
+<form [formGroup]="searchInput" (ngSubmit)="onSearch()">
+<div>
+    <mat-label>Search students: </mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput name="input" formControlName="input">
+    </mat-form-field>
+</div>
+<div>
+    <button mat-flat-button>Search</button>
+</div>
+</form>
