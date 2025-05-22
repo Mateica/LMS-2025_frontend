@@ -33,11 +33,11 @@ import { TeacherPageComponent } from './components/pages/teacher-page/teacher-pa
 import { StudentServicePageComponent } from './components/pages/student-service-page/student-service-page.component';
 
 export const routes: Routes = [
+    // {
+    //     path:'', component: HomeComponent
+    // },
     {
-        path:'/', component: HomeComponent
-    },
-    {
-        path: '', redirectTo: '/login', pathMatch: 'full'
+        path: '', redirectTo: 'login', pathMatch: 'full'
     },
     {
         path: 'login', component: LoginComponent

@@ -6,6 +6,13 @@
     <form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <input name="email" type="email" formControlName="email" placeholder="Email">
         <input type="password" formControlName="password" placeholder="Password">
+        <div>
+            <select name="roles" id="roles">
+                @for(r of roles; track $index){
+                    <option value="r">{{r.name}}</option>
+                }
+            </select>
+        </div>
         <button>Submit</button>
     </form>
 

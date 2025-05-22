@@ -13,5 +13,5 @@ export interface SignupCredentials {
 
 export interface LoginResponse {
     token : string;
-    role : string;
+    roles : string[];
 }
