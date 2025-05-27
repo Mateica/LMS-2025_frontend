@@ -7,7 +7,7 @@ import { environment } from '../../environment';
   providedIn: 'root'
   })
 export abstract class GenericService<T> {
-  private apiUrl : string;
+  protected apiUrl : string;
   constructor(protected http : HttpClient, protected url : string) {
     this.apiUrl = environment.baseUrl + this.url;
   }
@@ -20,7 +20,7 @@ export abstract class GenericService<T> {
     return this.http.get<T[]>(`${this.apiUrl}/active`);
   }
 
-  getById(id : number): Observable<T> {
+  getById(id : number | string): Observable<T> {
     return this.http.get<T>(`${this.apiUrl}/${id}`);
   }
 
@@ -29,15 +29,15 @@ export abstract class GenericService<T> {
     return this.http.post<T>(this.apiUrl, entity);
   }
 
-  update(id: number, entity: T): Observable<T> {
+  update(id: number | string, entity: T): Observable<T> {
     return this.http.put<T>(`${this.apiUrl}/${id}`, entity);
   }
 
- delete(id: number): Observable<void> {
+ delete(id: number | string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  softDelete(id: number): Observable<T> {
+  softDelete(id: number | string): Observable<T> {
     return this.http.patch<T>(`${this.apiUrl}/${id}`, { active: false });
   }
 }

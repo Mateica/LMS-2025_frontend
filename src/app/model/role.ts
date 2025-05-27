@@ -1,8 +1,8 @@
 import { RegisteredUser } from "./registered-user";
 
 export interface Role {
-    id : number;
+    id?: number;
     name : string;
-    registeredUser : RegisteredUser ; 
-    active : boolean;
+    registeredUser? : RegisteredUser ; 
+    active? : boolean;
 }

@@ -5,6 +5,7 @@ import { StudentServiceStaffService } from '../../../service/student-service-sta
 import { MatToolbar } from '@angular/material/toolbar';
 import { StudentOnYearService } from '../../../service/student-on-year/student-on-year.service';
 import { StudentOnYear } from '../../../model/student-on-year';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-student-service-page',
@@ -16,23 +17,29 @@ export class StudentServicePageComponent implements OnInit {
   staff : StudentServiceStaff[] = [];
   studentsOnYear : StudentOnYear[] = [];
 
-  constructor(private service : StudentServiceStaffService, private studentOnYearService : StudentOnYearService,  private router : Router){}
+  constructor(private service : StudentServiceStaffService, private studentOnYearService : StudentOnYearService, private authService : AuthService,  private router : Router){}
 
   ngOnInit(): void {
     this.getAll();
   }
 
   getAll(){
-    this.service.getAll().subscribe((r : StudentServiceStaff[])=>{
-      this.staff = r.filter(s=> s.active === true); // Dobavljanje svih aktivnih elemenata - da li je ovo u redu?
+    this.service.getAllActive().subscribe((r : StudentServiceStaff[])=>{
+      this.staff = r;
     });
 
-    this.studentOnYearService.getAll().subscribe((r : StudentOnYear[])=>{
-      this.studentsOnYear = r.filter(s=> s.active === true); // Dobavljanje svih aktivnih elemenata - da li je ovo u redu?
+    this.studentOnYearService.getAllActive().subscribe((r : StudentOnYear[])=>{
+      this.studentsOnYear = r;
     });
   }
 
   navigateTo(path: string) {
     this.router.navigate(['/' + path]);
   }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
 }

@@ -1,0 +1,28 @@
+<div class="role-card">
+    <div class="card-title">
+        <h1>Create Staff Member</h1>
+    </div>
+    <form class="form-group" [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label>Registered User: <select name="registeredUser" id="registeredUser" formControlName="registeredUser"></select>
+                @for(u of users; track $index){
+                    <option value="u">{{u.email}} {{u.username}}</option>
+                }
+            </label>
+        </div>
+        <div>
+            <label>First Name: <input type="text" name="firstName" placeholder="First name" formControlName="firstName"></label>
+        </div>
+        <div>
+            <label>Last Name: <input type="text" name="lastName" placeholder="Last name" formControlName="lastName"></label>
+        </div>
+        <div>
+            <label>Student Affairs Office: <select name="studentAffairsOffice" id="studentAffairsOffice" formControlName="studentAffairsOffice"></select>
+                @for(o of studentAffairsOffices; track $index){
+                    <option value="o">{{o.faculty?.name}}</option>
+                }
+            </label>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>

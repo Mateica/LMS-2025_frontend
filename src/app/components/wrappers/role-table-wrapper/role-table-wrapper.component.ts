@@ -26,7 +26,7 @@ export class RoleTableWrapperComponent {
   }
 
   deleteRole(t : Role){
-    this.service.delete(t.id).subscribe(()=>{
+    this.service.delete(Number(t.id)).subscribe(()=>{
       this.getAll();
     });
   }

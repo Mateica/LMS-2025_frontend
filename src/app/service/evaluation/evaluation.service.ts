@@ -10,4 +10,8 @@ export class EvaluationService extends GenericService<Evaluation> {
   constructor(http : HttpClient) {
       super(http,"/evaluations");
    }
+
+   getSchedule() {
+    return this.http.get<Evaluation[]>(`${this.apiUrl}/schedule`);
+  }
 }

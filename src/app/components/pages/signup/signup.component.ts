@@ -5,10 +5,15 @@ import { AuthService } from '../../../auth/auth.service';
 import { SignupCredentials } from '../../../model/user-credentials';
 import { RegisteredUser } from '../../../model/registered-user';
 import { ToastrService } from 'ngx-toastr';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

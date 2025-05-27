@@ -1,15 +1,28 @@
-<div class="signup-card">
-    <div class="card-title">
-        <h1>Create Account</h1>
-        <span>Already have an account? <a routerLink="/login">Sign In</a></span>
-    </div>
-    <form class="form-group" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <input type="text" name="username" placeholder="Username" formControlName="username">
-        <input type="email" name="email" placeholder="Email" formControlName="email">
-        <input type="password" name="password" placeholder="Password" formControlName="password">
-        <input type="submit" value="Signup">
-    </form>
-    <div class="card-terms">
-        <input type="checkbox"> <span>I have read and agree to the <a href="">Terms of Service</a></span>
-    </div>
+<div class="w-full max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+  <h1 class="text-2xl font-bold mb-4 text-center">Create Account</h1>
+  <p class="text-sm text-center mb-6">
+    Already have an account?
+    <a routerLink="/login" class="text-blue-600 hover:underline">Sign In</a>
+  </p>
+
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-5">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username" placeholder="Username" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Password" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" class="w-full py-2">
+      Signup
+    </button>
+  </form>
 </div>

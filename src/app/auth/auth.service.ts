@@ -19,12 +19,16 @@ export class AuthService {
     return this.http.post<RegisteredUser>(`${environment.baseUrl}/auth/register`, credentials);
   }
 
-  login(credentials : UserCredentials) : Observable<LoginResponse>{
+  login(credentials: UserCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.baseUrl}/auth/login`, credentials)
-      .pipe(tap((result) => {
-        this.token = result["token"];
-        this.user = JSON.parse(atob(result["token"].split(".")[1]));
-        localStorage.setItem('authUser', JSON.stringify(result));
+      .pipe(tap(result => {
+        if (result && result.token) {
+          this.token = result.token;
+          this.user = JSON.parse(atob(this.token.split(".")[1]));
+          localStorage.setItem('authUser', JSON.stringify(result));
+        } else {
+          console.error("No token in login response");
+        }
       }));
   }
 
@@ -38,7 +42,7 @@ export class AuthService {
     const authData = localStorage.getItem('authUser');
     if (!authData) return false;
 
-    const token = JSON.parse(authData).token;
+    const token = JSON.parse(authData).jwtToken;
     const payload = JSON.parse(atob(token.split('.')[1]));
     const now = Math.floor(Date.now() / 1000);
 
