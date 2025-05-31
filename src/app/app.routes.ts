@@ -33,6 +33,7 @@ import { TeacherPageComponent } from './components/pages/teacher-page/teacher-pa
 import { StudentServicePageComponent } from './components/pages/student-service-page/student-service-page.component';
 import { ExamTableWrapperComponent } from './components/wrappers/exam-table-wrapper/exam-table-wrapper.component';
 import { ExamSchedulerComponent } from './components/exam-scheduler/exam-scheduler.component';
+import { StudentPageComponent } from './components/pages/student-page/student-page.component';
 
 export const routes: Routes = [
     // {
@@ -154,5 +155,10 @@ export const routes: Routes = [
         path: 'studentServicePage', component: StudentServicePageComponent , data: {
             allowedRoles: ["ADMIN", "STAFF"]
         }
-    }
+    },
+    {
+        path: 'studentPage', component : StudentPageComponent, data:{
+            allowedRoles: ["TEACHER"]
+        }, canActivate: [authGuard]
+    },
 ];

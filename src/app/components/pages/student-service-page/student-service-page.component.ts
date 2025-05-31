@@ -6,10 +6,11 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { StudentOnYearService } from '../../../service/student-on-year/student-on-year.service';
 import { StudentOnYear } from '../../../model/student-on-year';
 import { AuthService } from '../../../auth/auth.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-student-service-page',
-  imports: [MatToolbar,RouterLinkWithHref],
+  imports: [MatToolbar, MatIconModule,RouterLinkWithHref],
   templateUrl: './student-service-page.component.html',
   styleUrl: './student-service-page.component.css'
 })

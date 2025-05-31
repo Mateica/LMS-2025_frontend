@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit{
             this.router.navigate(['admin']);
             break;
           case 'STUDENT':
-            this.router.navigate(['student']);
+            this.router.navigate(['studentPage']);
             break;
           case 'STAFF':
             this.router.navigate(['studentServicePage']);

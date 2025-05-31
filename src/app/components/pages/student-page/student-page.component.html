@@ -1,15 +1,38 @@
-<mat-toolbar color="primary" class="flex flex-wrap items-center justify-between px-4 py-2">
-  <span class="text-lg font-semibold text-white">Student Service</span>
+<mat-toolbar color="primary" class="flex flex-wrap items-center justify-between px-4 py-2 relative">
 
-  <div class="hidden md:flex flex-wrap items-center gap-4 text-white">
+  <!-- Za mobilne uređaje -->
+  <div class="md:hidden flex items-center mr-3 relative">
+    <input id="menu-toggle" type="checkbox" class="hidden peer" />
+    <label for="menu-toggle" class="cursor-pointer text-white flex items-center z-20">
+      <mat-icon class="peer-checked:hidden">menu</mat-icon>
+      <mat-icon class="hidden peer-checked:inline">close</mat-icon>
+    </label>
+
+    <div
+      class="hidden peer-checked:flex flex-col gap-4 bg-primary text-white absolute top-full left-0 w-48 mt-2 rounded shadow-lg z-10 px-4 py-3"
+    >
+      <a mat-button routerLink="/home" routerLinkActive="font-bold underline">Home</a>
+      <a mat-button routerLink="/examinations" routerLinkActive="font-bold underline">Exams</a>
+      <a mat-button routerLink="/evaluationGrades" routerLinkActive="font-bold underline">My grades</a>
+    </div>
+  </div>
+
+  <div class="flex items-center text-white text-lg font-semibold flex-grow select-none">
+    Student Page
+  </div>
+
+  <div class="hidden md:flex items-center gap-4 text-white">
     <a mat-button routerLink="/home" routerLinkActive="font-bold underline">Home</a>
     <a mat-button routerLink="/examinations" routerLinkActive="font-bold underline">Exams</a>
     <a mat-button routerLink="/evaluationGrades" routerLinkActive="font-bold underline">My grades</a>
+    <button mat-button color="accent" (click)="navigateTo('login')" class="w-auto">Login</button>
+    <button mat-raised-button color="accent" (click)="navigateTo('register')" class="w-auto">Register</button>
   </div>
 
-  <div class="flex flex-wrap items-center gap-2 mt-2 md:mt-0">
-    <button mat-button color="accent" (click)="navigateTo('login')">Login</button>
-    <button mat-raised-button color="accent" (click)="navigateTo('register')">Register</button>
-    <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
+  <div class="flex items-center ml-4">
+    <button mat-stroked-button color="warn" (click)="logout()" class="w-auto text-white">
+      Logout
+    </button>
   </div>
+
 </mat-toolbar>

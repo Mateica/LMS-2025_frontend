@@ -3,14 +3,15 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { StudentService } from '../../../service/student/student.service';
 import { StudentOnYearService } from '../../../service/student-on-year/student-on-year.service';
 import { AuthService } from '../../../auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { EvaluationService } from '../../../service/evaluation/evaluation.service';
 import { EvaluationGradeService } from '../../../service/evaluation-grade/evaluation-grade.service';
 import { ExaminationService } from '../../../service/examination/examination.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-student-page',
-  imports: [MatToolbar],
+  imports: [MatToolbar,MatIconModule, RouterLinkWithHref],
   templateUrl: './student-page.component.html',
   styleUrl: './student-page.component.css'
 })

@@ -1,5 +1,27 @@
-<mat-toolbar color="primary" class="flex flex-wrap justify-between items-center px-4 py-2">
-  <div class="text-lg font-semibold text-white">
+<mat-toolbar color="primary" class="flex flex-wrap justify-between items-center px-4 py-2 relative">
+
+  <!-- Za mobilne uređaje -->
+  <div class="md:hidden flex items-center mr-3 relative">
+    <input id="menu-toggle" type="checkbox" class="hidden peer" />
+    <label for="menu-toggle" class="cursor-pointer text-white flex items-center z-20">
+      <mat-icon class="peer-checked:hidden">menu</mat-icon>
+      <mat-icon class="hidden peer-checked:inline">close</mat-icon>
+    </label>
+
+    <div
+      class="hidden peer-checked:flex flex-col gap-2 bg-primary text-white absolute top-full left-0 w-52 mt-2 rounded shadow-lg z-10 px-4 py-3"
+    >
+      <a routerLink="/home" routerLinkActive="font-bold underline">Home</a>
+      <a routerLink="/studentSearch" routerLinkActive="font-bold underline">Search Students</a>
+      <a routerLink="/students" routerLinkActive="font-bold underline">My Students</a>
+      <a routerLink="/outcomeSheet" routerLinkActive="font-bold underline">Outcome Sheet</a>
+      <a routerLink="/subjects" routerLinkActive="font-bold underline">Subjects</a>
+      <a routerLink="/grades" routerLinkActive="font-bold underline">Grades</a>
+    </div>
+  </div>
+
+
+  <div class="text-lg font-semibold text-white flex-grow select-none">
     Teacher Page
   </div>
 
@@ -12,18 +34,12 @@
     <a routerLink="/grades" routerLinkActive="font-bold underline">Grades</a>
   </div>
 
+
   <div class="mt-2 md:mt-0">
     <button mat-stroked-button color="accent" (click)="logout()">
       Logout
     </button>
   </div>
 
-  <div class="md:hidden w-full mt-2 space-y-2 text-white">
-    <a class="block" routerLink="/home">Home</a>
-    <a class="block" routerLink="/studentSearch">Search Students</a>
-    <a class="block" routerLink="/students">My Students</a>
-    <a class="block" routerLink="/outcomeSheet">Outcome Sheet</a>
-    <a class="block" routerLink="/subjects">Subjects</a>
-    <a class="block" routerLink="/grades">Grades</a>
-  </div>
 </mat-toolbar>
+
