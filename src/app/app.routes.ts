@@ -31,6 +31,8 @@ import { OutcomeFormWrapperComponent } from './components/wrappers/outcome-form-
 import { OutomeTableWrapperComponent } from './components/wrappers/outome-table-wrapper/outome-table-wrapper.component';
 import { TeacherPageComponent } from './components/pages/teacher-page/teacher-page.component';
 import { StudentServicePageComponent } from './components/pages/student-service-page/student-service-page.component';
+import { ExamTableWrapperComponent } from './components/wrappers/exam-table-wrapper/exam-table-wrapper.component';
+import { ExamSchedulerComponent } from './components/exam-scheduler/exam-scheduler.component';
 
 export const routes: Routes = [
     // {
@@ -80,6 +82,11 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'examinations', component: ExamTableWrapperComponent, data: {
+            allowedRoles: ["ADMIN", "TEACHER", "STAFF", "STUDENT"]
+        }, canActivate: [authGuard]
+    },
+    {
         path: 'evaluationInstruments', component : EvaluationInstrumentTableWrapperComponent, data:{
             allowedRoles: ["ADMIN", "TEACHER"]
         },
@@ -90,6 +97,11 @@ export const routes: Routes = [
             allowedRoles: ["ADMIN", "TEACHER"]
         },
         canActivate: [authGuard]
+    },
+    {
+        path: 'studentServicePage/examScheduler', component : ExamSchedulerComponent, data: {
+            allowedRoles: ["ADMIN", "STAFF"]
+        }, canActivate: [authGuard]
     },
     {
         path: 'syllabi', component : OutomeTableWrapperComponent, data:{

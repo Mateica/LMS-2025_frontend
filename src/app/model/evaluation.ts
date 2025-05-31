@@ -1,3 +1,4 @@
+import { EvaluationGrade } from "./evaluation-grade"
 import { EvaluationInstrument } from "./evaluation-instrument"
 import { EvaluationType } from "./evaluation-type"
 import { Examination } from "./examination"
@@ -13,5 +14,6 @@ export interface Evaluation {
 	evaluationInstrument? : EvaluationInstrument;
 	examination? : Examination;
 	subjectRealization? : SubjectRealization;
+	evaluationGrades : EvaluationGrade[];
 	active : boolean;
 }

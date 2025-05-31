@@ -1,11 +1,14 @@
+import { Evaluation } from "./evaluation";
 import { Note } from "./note";
 import { StudentOnYear } from "./student-on-year";
 
 export interface Examination {
-    id : number;
+    id? : number;
 	numberOfPoints : number;
-	notes : Note[];
-	studentOnYear : StudentOnYear
-	active : boolean;
+	notes? : Note[];
+	evaluations? : Evaluation[];
+	studentOnYear? : StudentOnYear;
+	active? : boolean;
+
 
 }

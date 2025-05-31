@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentServiceStaff } from '../../../model/student-service-staff';
-import { Router } from '@angular/router';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { StudentServiceStaffService } from '../../../service/student-service-staff/student-service-staff.service';
 import { MatToolbar } from '@angular/material/toolbar';
 import { StudentOnYearService } from '../../../service/student-on-year/student-on-year.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-student-service-page',
-  imports: [MatToolbar],
+  imports: [MatToolbar,RouterLinkWithHref],
   templateUrl: './student-service-page.component.html',
   styleUrl: './student-service-page.component.css'
 })

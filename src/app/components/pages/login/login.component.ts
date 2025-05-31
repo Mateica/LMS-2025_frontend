@@ -9,6 +9,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit{
   constructor(
     private service: AuthService,
     private roleService: RoleService,
-    private router: Router
+    private router: Router,
+    private toaster : ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -37,62 +39,71 @@ export class LoginComponent implements OnInit{
         this.roles = roles;
       },
       error: () => {
-        alert('Failed to load roles.');
+        this.toaster.error('Failed to load roles.');
       }
     });
   }
 
   onSubmit() {
     if (!this.loginForm.valid) {
-      alert('Please fill all required fields correctly.');
-      return;
-    }
+    this.toaster.error('Please fill all required fields correctly.');
+    return;
+  }
 
-    const email = this.loginForm.value.email ?? '';
-    const password = this.loginForm.value.password ?? '';
-    const selectedRoles = this.loginForm.value.roles ?? '';
+  const email = this.loginForm.value.email ?? '';
+  const password = this.loginForm.value.password ?? '';
+  const selectedRoles = this.loginForm.value.roles ?? '';
 
-    if (!email || !password) {
-      alert('Email and password cannot be empty.');
-      return;
-    }
+  if (!email || !password) {
+    this.toaster.error('Email and password cannot be empty.');
+    return;
+  }
 
-    const userCredentials: UserCredentials = {
-      email,
-      password
-    };
+  const userCredentials: UserCredentials = {
+    email,
+    password
+  };
 
-    this.service.login(userCredentials).subscribe({
-      next: (data: LoginResponse) => {
-        console.log('Login success:', data);
-          localStorage.setItem('authUser', JSON.stringify(data));
+  this.service.login(userCredentials).subscribe({
+    next: (data: LoginResponse) => {
+      console.log('Login success:', data);
+      localStorage.setItem('authUser', JSON.stringify(data));
 
-        if (this.service.isLoggedIn()) {
-
-          if(!data.roles.includes(selectedRoles)) {
-            alert("You don't have permission to access the site page!");
-            return;
-          }
-          
-          if (data.roles.includes('ADMIN')) {
-            this.router.navigate(['admin']);
-          } else if (data.roles.includes('STUDENT')) {
-            this.router.navigate(['student']);
-          } else if (data.roles.includes('STAFF')) {
-            this.router.navigate(['studentServicePage']);
-          } else if (data.roles.includes('TEACHER')) {
-            this.router.navigate(['teacherPage']);
-          } else {
-            this.router.navigate(['home']);
-          }
-        } else {
-          alert('Login failed. Please try again.');
+      if (this.service.isLoggedIn()) {
+        if (!data.roles.includes(selectedRoles)) {
+          this.toaster.error("You don't have permission to access the selected role!");
+          return;
         }
-      },
-      error: (err) => {
-        alert('Login failed. Please check your credentials.');
-        console.error('Login error:', err);
+
+        switch (selectedRoles) {
+          case 'ADMIN':
+            this.router.navigate(['admin']);
+            break;
+          case 'STUDENT':
+            this.router.navigate(['student']);
+            break;
+          case 'STAFF':
+            this.router.navigate(['studentServicePage']);
+            break;
+          case 'TEACHER':
+            this.router.navigate(['teacherPage']);
+            break;
+          case 'USER':
+            this.router.navigate(['home']);
+            break;
+          default:
+            this.toaster.error("Unknown role selected.");
+            this.router.navigate(['home']);
+            break;
+        }
+      } else {
+        this.toaster.error('Login failed. Please try again.');
       }
-    });
+    },
+    error: (err) => {
+      this.toaster.error('Login failed. Please check your credentials.');
+      console.error('Login error:', err);
+    }
+  });
   }
 }

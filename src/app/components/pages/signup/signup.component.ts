@@ -33,7 +33,7 @@ export class SignupComponent {
       const {username = '', email = '', password = ''} = this.signupForm.value;
 
       if(username === '' || email === '' || password === ''){
-        alert("Signup error!");
+        this.toaster.error("Signup error!");
         return;
       }
 
