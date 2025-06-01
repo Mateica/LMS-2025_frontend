@@ -1,1 +1,108 @@
-<p>generic-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+  @for (input of metadata.inputs; track $index) {
+    @if (input.maxCount && input.maxCount > 1) {
+      <div [formArrayName]="input.key" class="space-y-4">
+        <h3 class="text-lg font-semibold">{{ input.title }}</h3>
+
+        @for (
+          control of getFormArray(form.get(input.key)).controls;
+          track $index;
+          let i = $index
+        ) {
+          <div [formGroupName]="i" class="border rounded p-4 space-y-4">
+            @for (child of input.children; track $index) {
+                @if(child.type === 'text') {
+                  <div>
+                    <label class="block font-medium mb-1">{{ child.title }}</label>
+                    <input
+                      type="text"
+                      class="w-full border rounded px-3 py-2"
+                      [formControlName]="child.key"
+                      [placeholder]="child.title"
+                    />
+                  </div>
+                }
+                @else if(child.type === 'textarea') {
+                  <div>
+                    <label class="block font-medium mb-1">{{ child.title }}</label>
+                    <textarea
+                      class="w-full border rounded px-3 py-2"
+                      [formControlName]="child.key"
+                      [placeholder]="child.title"
+                    ></textarea>
+                  </div>
+                }
+                @else if(child.type === 'quill') {
+                  <div>
+                    <label class="block font-medium mb-1">{{ child.title }}</label>
+                    <quill-editor
+                      class="bg-white border rounded"
+                      [formControlName]="child.key"
+                    ></quill-editor>
+                  </div>
+                }
+              }
+
+            <button
+              type="button"
+              (click)="removeElement(form.get(input.key), i)"
+              class="text-red-600 text-sm underline"
+            >
+              Remove {{ input.title }}
+            </button>
+          </div>
+        }
+
+        <button
+          type="button"
+          class="bg-blue-500 text-white px-4 py-2 rounded"
+          (click)="addElement(form.get(input.key), input.children)"
+        >
+          Add {{ input.title }}
+        </button>
+      </div>
+    } @else {
+      @switch(input.type) {
+        @case('text') {
+          <div>
+            <label class="block font-medium mb-1">{{ input.title }}</label>
+            <input
+              type="text"
+              class="w-full border rounded px-3 py-2"
+              [formControlName]="input.key"
+              [placeholder]="input.title"
+            />
+          </div>
+        }
+        @case('textarea') {
+          <div>
+            <label class="block font-medium mb-1">{{ input.title }}</label>
+            <textarea
+              class="w-full border rounded px-3 py-2"
+              [formControlName]="input.key"
+              [placeholder]="input.title"
+            ></textarea>
+          </div>
+        }
+        @case('quill') {
+          <div>
+            <label class="block font-medium mb-1">{{ input.title }}</label>
+            <quill-editor
+              class="bg-white border rounded"
+              [formControl]="getFormControl(form.get(input.key))"
+            ></quill-editor>
+          </div>
+        }
+      }
+    }
+  }
+
+  <div class="pt-4">
+    <button
+      type="submit"
+      class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded"
+    >
+      Submit
+    </button>
+  </div>
+</form>
