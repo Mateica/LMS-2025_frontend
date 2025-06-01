@@ -1,0 +1,73 @@
+<mat-form-field appearance="outline" class="w-full max-w-md mb-4">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" />
+</mat-form-field>
+
+<div class="mb-4 flex gap-2">
+  @if(tableMetadata.bulkActions?.length && selection.selected.length) {
+    @for(action of tableMetadata.bulkActions; track action) {
+      <button mat-raised-button color="primary" (click)="onEmitEvent(action.event, selection.selected)">
+        {{ action.title }}
+      </button>
+    }
+  }
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox
+        (change)="toggleAllRows()"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()"
+        [aria-label]="checkboxLabel()"
+      >
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="selection.toggle(row)"
+        [checked]="selection.isSelected(row)"
+        [aria-label]="checkboxLabel(row)"
+      >
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  @for(col of tableMetadata.columns; track col.key) {
+    <ng-container [matColumnDef]="col.key">
+      <th mat-header-cell *matHeaderCellDef> {{ col.title }} </th>
+      <td mat-cell *matCellDef="let element">
+        {{
+          col.displayFn
+            ? col.displayFn(element, col.key, dataSource.data)
+            : element[col.key]
+        }}
+      </td>
+    </ng-container>
+  }
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      @for(action of tableMetadata.rowActions; track action) {
+        <button mat-button (click)="onEmitEvent(action.event, element)">
+          {{ action.title }}
+        </button>
+      }
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="tableMetadata.displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: tableMetadata.displayedColumns"></tr>
+</table>
+
+<mat-paginator
+  [length]="length"
+  [pageSizeOptions]="tableMetadata.pageSizeOptions ?? [5, 10, 25, 100]"
+  [pageSize]="tableMetadata.pageSize ?? 5"
+  [pageIndex]="pageIndex"
+  (page)="onPageEvent($event)"
+>
+</mat-paginator>
