@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Dodaj evaluaciju</h2>
+
+<mat-dialog-content class="dialog-content">
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Broj poena</mat-label>
+    <input matInput type="number" [(ngModel)]="evaluation.numberOfPoints" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Početak</mat-label>
+    <input matInput [matDatepicker]="startPicker" [(ngModel)]="evaluation.startTime" />
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Kraj</mat-label>
+    <input matInput [matDatepicker]="endPicker" [(ngModel)]="evaluation.endTime" />
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions >
+  <button mat-button (click)="cancel()">Otkaži</button>
+  <button mat-flat-button color="primary" (click)="save()">Sačuvaj</button>
+</mat-dialog-actions>

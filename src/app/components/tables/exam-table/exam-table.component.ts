@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ExaminationService } from '../../../service/examination/examination.service';
 import { Router } from '@angular/router';
 import { Examination } from '../../../model/examination';
@@ -13,7 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-exam-table',
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatButtonModule, MatTableModule,MatSortModule],
   templateUrl: './exam-table.component.html',
-  styleUrl: './exam-table.component.css'
+  styleUrl: './exam-table.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ExamTableComponent implements OnInit {
 
@@ -22,6 +23,7 @@ export class ExamTableComponent implements OnInit {
 
   displayedColumns = ['numberOfPoints', 'notes', 'evaluations', 'studentOnYear'];
 
+  @Input()
   dataSource = new MatTableDataSource<Examination>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

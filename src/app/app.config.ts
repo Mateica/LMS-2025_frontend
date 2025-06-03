@@ -11,7 +11,7 @@ import { SchedulerModule } from 'angular-calendar-scheduler';
 import { DateAdapter, MOMENT } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 const calendarModuleWithProviders = CalendarModule.forRoot({
   provide: DateAdapter,

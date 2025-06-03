@@ -1,5 +1,5 @@
 export interface TitleType {
-    id : number;
+    id? : number;
     name : string;
-    active : boolean;
+    active? : boolean;
 }
