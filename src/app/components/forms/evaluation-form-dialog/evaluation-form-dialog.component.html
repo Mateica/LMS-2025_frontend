@@ -1,29 +1,92 @@
-<h2 mat-dialog-title>Dodaj evaluaciju</h2>
+<h2 mat-dialog-title>Add Evaluation</h2>
 
 <mat-dialog-content class="dialog-content">
 
   <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Broj poena</mat-label>
+    <mat-label>Maximum number of points</mat-label>
     <input matInput type="number" [(ngModel)]="evaluation.numberOfPoints" required />
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Početak</mat-label>
-    <input matInput [matDatepicker]="startPicker" [(ngModel)]="evaluation.startTime" />
-    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-    <mat-datepicker #startPicker></mat-datepicker>
-  </mat-form-field>
+  <!-- Start Date + Time -->
+  <div class="row">
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Start date</mat-label>
+      <input matInput [matDatepicker]="startPicker" [(ngModel)]="startDate" />
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Kraj</mat-label>
-    <input matInput [matDatepicker]="endPicker" [(ngModel)]="evaluation.endTime" />
-    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-    <mat-datepicker #endPicker></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Start time</mat-label>
+      <input matInput type="time" [(ngModel)]="startTime" />
+    </mat-form-field>
+  </div>
 
+  <!-- End Date + Time -->
+  <div class="row">
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>End date</mat-label>
+      <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" />
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>End time</mat-label>
+      <input matInput type="time" [(ngModel)]="endTime" />
+    </mat-form-field>
+  </div>
+
+  @if (evaluationTypes.length > 0) {
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Evaluation type</mat-label>
+      <mat-select [(ngModel)]="evaluation.evaluationType">
+        @for (type of evaluationTypes; track type.id) {
+          <mat-option [value]="type">{{ type.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
+  @if (evaluationInstruments.length > 0) {
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Evaluation instrument</mat-label>
+      <mat-select [(ngModel)]="evaluation.evaluationInstrument">
+        @for (instrument of evaluationInstruments; track instrument.id) {
+          <mat-option [value]="instrument">{{ instrument.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
+  @if (examinations.length > 0) {
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Examination</mat-label>
+      <mat-select [(ngModel)]="evaluation.examination">
+        @for (exam of examinations; track exam.id) {
+          <mat-option [value]="exam">
+            ID: {{ exam.id }} | Poeni: {{ exam.numberOfPoints }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
+  @if (subjectRealizations.length > 0) {
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Subject realization</mat-label>
+      <mat-select [(ngModel)]="evaluation.subjectRealization">
+        @for (subj of subjectRealizations; track subj.id) {
+          <mat-option [value]="subj">ID: {{ subj.id }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
+  <mat-checkbox [(ngModel)]="evaluation.active">Active</mat-checkbox>
 </mat-dialog-content>
 
-<mat-dialog-actions >
+<mat-dialog-actions>
   <button mat-button (click)="cancel()">Otkaži</button>
   <button mat-flat-button color="primary" (click)="save()">Sačuvaj</button>
 </mat-dialog-actions>
