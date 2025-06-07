@@ -6,33 +6,28 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="numberOfPoints">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Points</th>
-      <td mat-cell *matCellDef="let row">{{ row.numberOfPoints }}</td>
+    <ng-container matColumnDef="evaluation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Evaluation</th>
+      <td mat-cell *matCellDef="let row">{{ row.evaluation.evaluationType.name }} - {{row.evaluation.subjectRealization.subject.name}} - {{row.evaluation.evaluationInstrument?.name}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="notes">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Notes</th>
+    <ng-container matColumnDef="mark">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mark</th>
       <td mat-cell *matCellDef="let row">
-        @for(note of row.notes; track $index) {
-          {{ note.content }}<br />
-        }
+        {{row.mark}}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="evaluations">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Evaluations</th>
+    <ng-container matColumnDef="dateTimeEvaluated">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date and time of evaluation</th>
       <td mat-cell *matCellDef="let row">
-        @for(e of row.evaluations; track $index) {
-          {{ e.startTime }} - {{ e.endTime }}<br />
-          {{ e.evaluationType?.name }} - {{ e.evaluationInstrument?.name }}<br />
-        }
+        {{row.dateTimeEvaluated}}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="studentOnYear">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Student</th>
-      <td mat-cell *matCellDef="let row">{{ row.studentOnYear?.indexNumber }}</td>
+    <ng-container matColumnDef="teacher">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Teacher</th>
+      <td mat-cell *matCellDef="let row">{{row.teacher.firstName}} - {{row.teacher.lastName}}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
@@ -56,10 +51,11 @@
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" [attr.colspan]="displayedColumns.length">
-        No exams found.
+        No grades found.
       </td>
     </tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
 </div>
+

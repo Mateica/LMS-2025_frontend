@@ -34,6 +34,8 @@ import { StudentServicePageComponent } from './components/pages/student-service-
 import { ExamTableWrapperComponent } from './components/wrappers/exam-table-wrapper/exam-table-wrapper.component';
 import { ExamSchedulerComponent } from './components/exam-scheduler/exam-scheduler.component';
 import { StudentPageComponent } from './components/pages/student-page/student-page.component';
+import { EvaluationGradeTableComponent } from './components/tables/evaluation-grade-table/evaluation-grade-table.component';
+import { EvaluationGradeTableWrapperComponent } from './components/wrappers/evaluation-grade-table-wrapper/evaluation-grade-table-wrapper.component';
 
 export const routes: Routes = [
     // {
@@ -82,11 +84,48 @@ export const routes: Routes = [
         },
         canActivate: [authGuard]
     },
+
+     {
+        path: 'evaluationGrades', component : EvaluationGradeTableWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER","STUDENT","STAFF"]
+        },
+        canActivate: [authGuard]
+    },
+    // {
+    //     path: 'evaluationGradeForm', component : EvaluationGradeFormComponent,data:{
+    //         allowedRoles: ["ADMIN", "TEACHER"]
+    //     },
+    //     canActivate: [authGuard]
+    // },
     {
         path: 'examinations', component: ExamTableWrapperComponent, data: {
             allowedRoles: ["ADMIN", "TEACHER", "STAFF", "STUDENT"]
         }, canActivate: [authGuard]
     },
+     // {
+    //     path: 'examForm', component : ExamFormWrapperComponent,data:{
+    //         allowedRoles: ["ADMIN", "TEACHER"]
+    //     },
+    //     canActivate: [authGuard]
+    // },
+    {
+        path: 'evaluations', component : EvaluationTableWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER","STUDENT","STAFF"]
+        },
+        canActivate: [authGuard]
+    },
+    {
+        path: 'evaluationForm', component : EvaluationFormWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER"]
+        },
+        canActivate: [authGuard]
+    },
+    {
+        path: 'studentServicePage/examScheduler', component : ExamSchedulerComponent, data: {
+            allowedRoles: ["ADMIN", "STAFF"]
+        }, canActivate: [authGuard]
+    },
+
     {
         path: 'evaluationInstruments', component : EvaluationInstrumentTableWrapperComponent, data:{
             allowedRoles: ["ADMIN", "TEACHER"]

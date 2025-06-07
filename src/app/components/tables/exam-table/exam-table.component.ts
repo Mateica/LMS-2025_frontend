@@ -1,56 +1,86 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {
+  MatTableDataSource,
+  MatTableModule
+} from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import {
+  MatPaginator,
+  MatPaginatorModule
+} from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
 import { ExaminationService } from '../../../service/examination/examination.service';
 import { Router } from '@angular/router';
 import { Examination } from '../../../model/examination';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatButtonModule } from '@angular/material/button';
+import { Role } from '../../../model/role';
 
 @Component({
   selector: 'app-exam-table',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatButtonModule, MatTableModule,MatSortModule],
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatButtonModule
+  ],
   templateUrl: './exam-table.component.html',
   styleUrl: './exam-table.component.css',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ExamTableComponent implements OnInit {
+  @Input() exam: Examination | null = null;
+  @Input() role: Role | null = null;
 
-  @Input()
-  exam: Examination | null = null;
+  @Output() updateEvent = new EventEmitter<Examination>();
+  @Output() deleteEvent = new EventEmitter<Examination>();
+  @Output() exportPdfEvent = new EventEmitter<Examination>();
+  @Output() exportXmlEvent = new EventEmitter<Examination>();
 
-  displayedColumns = ['numberOfPoints', 'notes', 'evaluations', 'studentOnYear'];
+  displayedColumns = [
+    'numberOfPoints',
+    'notes',
+    'evaluations',
+    'studentOnYear',
+    'actions',
+  ];
 
-  @Input()
   dataSource = new MatTableDataSource<Examination>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  @Output() updateEvent = new EventEmitter<Examination>();
-  @Output() deleteEvent = new EventEmitter<Examination>();
-
-  constructor(private examService: ExaminationService, private router: Router) {}
+  constructor(
+    private examService: ExaminationService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.examService.getAllActive().subscribe((exams) => {
-      this.dataSource.data = exams;
+      this.dataSource = new MatTableDataSource(exams);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
 
     this.dataSource.filterPredicate = (data: Examination, filter: string) => {
       const filterLower = filter.trim().toLowerCase();
-
       const numberOfPoints = data.numberOfPoints?.toString() ?? '';
-      const notes = data.notes?.map(n => n.content).join(' ') ?? '';
-      const evaluations = data.evaluations?.map(e =>
-        `${e.startTime} ${e.endTime} ${e.evaluationType?.name ?? ''} ${e.evaluationInstrument?.name ?? ''}`
+      const notes = data.notes?.map((n) => n.content).join(' ') ?? '';
+      const evaluations = data.evaluations?.map(
+        (e) =>
+          `${e.startTime} ${e.endTime} ${e.evaluationType?.name ?? ''} ${e.evaluationInstrument?.name ?? ''}`
       ).join(' ') ?? '';
       const student = data.studentOnYear?.indexNumber ?? '';
-
       const combined = `${numberOfPoints} ${notes} ${evaluations} ${student}`.toLowerCase();
-
       return combined.includes(filterLower);
     };
 
@@ -68,15 +98,9 @@ export class ExamTableComponent implements OnInit {
     };
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -88,5 +112,13 @@ export class ExamTableComponent implements OnInit {
 
   onDelete(exam: Examination) {
     this.deleteEvent.emit(exam);
+  }
+
+  onExportPdf(exam: Examination) {
+    this.exportPdfEvent.emit(exam);
+  }
+
+  onExportXml(exam: Examination) {
+    this.exportXmlEvent.emit(exam);
   }
 }

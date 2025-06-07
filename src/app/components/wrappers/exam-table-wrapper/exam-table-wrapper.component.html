@@ -1,1 +1,7 @@
-<app-exam-table [dataSource]="exams"></app-exam-table>
+<app-exam-table
+  [role]="role"
+  (updateEvent)="setExam($event)"
+  (deleteEvent)="deleteExam($event)"
+  (exportPdfEvent)="exportToPdf($event)"
+  (exportXmlEvent)="exportToXml($event)">
+</app-exam-table>

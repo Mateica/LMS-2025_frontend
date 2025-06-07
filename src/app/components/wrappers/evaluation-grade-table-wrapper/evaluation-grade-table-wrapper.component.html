@@ -1,0 +1,8 @@
+<app-evaluation-grade-table
+[dataSource]="grades"
+[grade]="grade"
+(exportPdfEvent)="exportGradeToPDF($event)"
+(exportXmlEvent)="exportGradeToXML($event)"
+(updateEvent)="setGrade($event)"
+(deleteEvent)="deleteGrade($event)"
+></app-evaluation-grade-table>
