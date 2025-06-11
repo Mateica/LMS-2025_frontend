@@ -1,0 +1,9 @@
+<app-evaluation-table
+[dataSource]="evaluations"
+[evaluation]="evaluation"
+(exportPdfEvent)="exportEvaluationToPDF($event)"
+(exportXmlEvent)="exportEvaluationToXML($event)"
+(updateEvent)="setEvaluation($event)"
+(deleteEvent)="deleteEvaluation($event)"
+></app-evaluation-table>
+

@@ -23,13 +23,23 @@ export class EvaluationInstrumentFormWrapperComponent {
     }
   
      createEvaluationInstrument(t : EvaluationInstrument){
-      if(t.id !== undefined){
-        this.service.update(t.id, t).subscribe(()=>{
+      console.log(t);
+      if(t.id) {
+        console.log("called uodate");
+        this.service.update(Number(t.id), t).subscribe(()=>{
           this.getAll();
           this.router.navigate(["/"]);
         });
-      }else{
-        this.service.create(t).subscribe(()=>{
+      } else {
+        console.table(t);
+        const request = {
+          id: undefined,
+          name: t.name,
+          evaluations: [],
+          file: undefined,
+          active: undefined
+        };
+        this.service.create(request).subscribe(()=>{
           this.getAll();
           this.router.navigate(["/"]);
         });

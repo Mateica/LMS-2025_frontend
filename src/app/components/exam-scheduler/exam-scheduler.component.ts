@@ -28,6 +28,8 @@ import { Evaluation } from '../../model/evaluation';
 import { MatDialog } from '@angular/material/dialog';
 import { EvaluationFormDialogComponent } from '../forms/evaluation-form-dialog/evaluation-form-dialog.component';
 import { MatProgressSpinnerModule, ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { EvaluationTypeService } from '../../service/evaluation-type/evaluation-type.service';
+import { EvaluationType } from '../../model/evaluation-type';
 
 @Component({
   selector: 'app-exam-scheduler',
@@ -98,7 +100,8 @@ export class ExamSchedulerComponent implements OnInit {
     @Inject(LOCALE_ID) locale: string,
     private appService: ExamSchedulerService,
     private dateAdapter: DateAdapter,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private evaluationTypeService: EvaluationTypeService
   ) {
     this.locale = locale;
 
@@ -206,8 +209,8 @@ export class ExamSchedulerComponent implements OnInit {
       if (result) {
         const newEvent: CalendarSchedulerEvent = {
           id: (this.events.length + 1).toString(),
-          start: new Date(result.startTime),
-          end: new Date(result.endTime),
+          start: result.startTime,
+          end: result.endTime,
           title: result.evaluationType?.name ?? 'Nova evaluacija',
           content: result.evaluationInstrument?.name ?? '',
           color: { primary: '#90CAF9', secondary: '#E3F2FD' },
@@ -218,6 +221,29 @@ export class ExamSchedulerComponent implements OnInit {
         };
 
         this.events = [...this.events, newEvent];
+
+        // TODO: Dobavi neophodne selektovane stvari iz EvaluationFormDialogComponent onSave() i staviti te stvari u newEvaluationRequest
+        console.table(result);
+        const newEvaluationRequest: Evaluation = {
+          id: undefined,
+          startTime: newEvent.start,
+          endTime: newEvent.end!,
+          numberOfPoints: result.numberOfPoints,
+          evaluationType: result.evaluationType,
+          evaluationInstrument: result.evaluationInstrument,
+          examination: undefined,
+          subjectRealization: undefined,
+          evaluationGrades: [],
+          active: undefined
+        };
+        this.appService.create(newEvaluationRequest).subscribe({
+          next: () => {
+
+          },
+          error: () => {
+            
+          }
+        })
       }
     });
   }

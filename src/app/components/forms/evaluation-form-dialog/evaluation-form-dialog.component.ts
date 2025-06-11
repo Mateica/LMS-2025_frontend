@@ -21,7 +21,6 @@ import { EvaluationTypeService } from '../../../service/evaluation-type/evaluati
 import { EvaluationInstrumentService } from '../../../service/evaluation-instrument/evaluation-instrument.service';
 import { ExaminationService } from '../../../service/examination/examination.service';
 import { SubjectRealizationService } from '../../../service/subject-realization/subject-realization.service';
-import { EvaluationService } from '../../../service/evaluation/evaluation.service';
 
 
 @Component({
@@ -68,7 +67,6 @@ export class EvaluationFormDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EvaluationFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private evaluationService: EvaluationService,
     private evaluationTypeService: EvaluationTypeService,
     private evalInstrumentService: EvaluationInstrumentService,
     private examService: ExaminationService,

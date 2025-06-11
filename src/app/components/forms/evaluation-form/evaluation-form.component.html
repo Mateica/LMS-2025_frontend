@@ -1,0 +1,53 @@
+<div class="card-title">
+        <h1>Create Evaluation</h1>
+</div>
+<form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div>
+        <mat-label>Start Time: <input matInput type="datetime-local" formControlName="startTime"></mat-label>
+    </div>
+    <div>
+        <mat-label>End Time: <input matInput type="datetime-local" formControlName="startTime"></mat-label>
+    </div>
+    <div>
+        <mat-label>Number of points: <input matInput type="number" step="2" formControlName="numberOfPoints"></mat-label>
+    </div>
+    <div> Evaluation type:
+        <mat-select formControlName="evaluationType">
+            @for(type of evaluationTypes; track $index){
+                <mat-option [value]="type">{{type.name}}</mat-option>
+            }
+        </mat-select>
+    </div>
+     <div> Evaluation instrument:
+        <mat-select formControlName="evaluationInstrument">
+            @for(instrument of evaluationInstruments; track $index){
+                <mat-option [value]="instrument">{{instrument.name}}</mat-option>
+            }
+        </mat-select>
+    </div>
+     <div>Examination:
+        <mat-select formControlName="examination"> 
+            @for(exam of exams; track $index){
+                <mat-option [value]="exam">{{exam.evaluations?.at(0)?.evaluationType?.name}}  {{exam.evaluations?.at(0)?.subjectRealization?.subject?.name}}</mat-option>
+            }
+        </mat-select>
+    </div>
+     <div> Subject realization:
+        <mat-select formControlName="subjectRealization">
+            @for(subject of subjectRealizations; track $index){
+                <mat-option [value]="subject">{{subject.subject.name}}</mat-option>
+            }
+        </mat-select>
+    </div>
+     <div> Evaluation type:
+        <mat-select formControlName="evaluationType">
+            @for(grade of grades; track $index){
+                <mat-option [value]="grade">{{grade.mark}}</mat-option>
+            }
+        </mat-select>
+    </div>
+    <div>
+        <button matButton type="submit">Submit</button>
+    </div>
+
+</form>

@@ -1,0 +1,34 @@
+<div class="card-title">
+        <h1>Create Evaluation Grade</h1>
+</div>
+<form [formGroup]="gradeForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div> Evaluation:
+        <mat-select formControlName="evaluation">
+            @for(e of evaluations; track $index){
+                <mat-option [value]="e">{{e.evaluationType}} {{e.subjectRealization?.subject?.name}}</mat-option>
+            }
+        </mat-select>
+    </div>
+     <div> Teacher:
+        <mat-select formControlName="teacher">
+            @for(t of teachers; track $index){
+                <mat-option [value]="t">{{t.firstName}} {{t.lastName}}</mat-option>
+            }
+        </mat-select>
+    </div>
+    <div>
+        <mat-label>Date and time of evaluation: 
+            <input matInput type="datetime-local" formControlName="dateTimeEvaluated">
+        </mat-label>
+    </div>
+    <div>
+        <mat-label>Mark:
+             <input matInput type="number" formControlName="mark">
+        </mat-label>
+    </div>
+    <div>
+        <button matButton type="submit">Submit</button>
+    </div>
+
+</form>
+
