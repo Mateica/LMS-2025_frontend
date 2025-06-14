@@ -1,34 +1,55 @@
-<div class="card-title">
-        <h1>Create Evaluation Grade</h1>
+<div class="flex justify-center min-h-screen items-start bg-gray-50 py-10">
+  <div class="p-6 bg-white rounded shadow max-w-md">
+
+    <h1 class="text-2xl font-semibold text-left mb-6">Create Evaluation Grade</h1>
+
+    <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()" class="flex flex-col space-y-4">
+      <mat-form-field appearance="fill" class="min-w-[240px] max-w-sm">
+        <mat-label>Evaluation</mat-label>
+        <mat-select formControlName="evaluation" required>
+          <mat-option *ngFor="let e of evaluations" [value]="e.id">
+            {{ e.evaluationType?.name }} {{ e.subjectRealization?.subject?.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="min-w-[240px] max-w-sm">
+        <mat-label>Teacher</mat-label>
+        <mat-select formControlName="teacher" required>
+          <mat-option *ngFor="let t of teachers" [value]="t.id">
+            {{ t.firstName }} {{ t.lastName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="flex flex-col min-w-[240px] max-w-sm">
+        <label for="dateTimeEvaluated" class="mb-1 font-medium text-gray-700">
+          Date and time of evaluation
+        </label>
+        <input
+          id="dateTimeEvaluated"
+          type="datetime-local"
+          formControlName="dateTimeEvaluated"
+          class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        />
+      </div>
+
+      <mat-form-field appearance="fill" class="min-w-[240px] max-w-sm">
+        <mat-label>Mark</mat-label>
+        <input matInput type="number" formControlName="mark" required min="5" />
+      </mat-form-field>
+
+      <div class="pt-2">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="py-2 px-6 rounded-md"
+        >
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
 </div>
-<form [formGroup]="gradeForm" (ngSubmit)="onSubmit()" class="space-y-6">
-    <div> Evaluation:
-        <mat-select formControlName="evaluation">
-            @for(e of evaluations; track $index){
-                <mat-option [value]="e">{{e.evaluationType}} {{e.subjectRealization?.subject?.name}}</mat-option>
-            }
-        </mat-select>
-    </div>
-     <div> Teacher:
-        <mat-select formControlName="teacher">
-            @for(t of teachers; track $index){
-                <mat-option [value]="t">{{t.firstName}} {{t.lastName}}</mat-option>
-            }
-        </mat-select>
-    </div>
-    <div>
-        <mat-label>Date and time of evaluation: 
-            <input matInput type="datetime-local" formControlName="dateTimeEvaluated">
-        </mat-label>
-    </div>
-    <div>
-        <mat-label>Mark:
-             <input matInput type="number" formControlName="mark">
-        </mat-label>
-    </div>
-    <div>
-        <button matButton type="submit">Submit</button>
-    </div>
-
-</form>
-

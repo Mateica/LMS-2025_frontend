@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environment';
 import { Observable, tap } from 'rxjs';
-import { LoginResponse, SignupCredentials, UserCredentials } from '../model/user-credentials';
+import { LoginResponse, UserCredentials } from '../model/user-credentials';
 import { RegisteredUser } from '../model/registered-user';
 import { Role } from '../model/role';
 
@@ -12,6 +12,8 @@ import { Role } from '../model/role';
 export class AuthService {
   user : RegisteredUser | null = null;
   token : string | null = null;
+  currentUserRoles: string[] = [];
+  currentlyLoggedInRole: string;
 
   constructor(private http : HttpClient) { }
 
@@ -19,12 +21,16 @@ export class AuthService {
     return this.http.post<RegisteredUser>(`${environment.baseUrl}/auth/register`, credentials);
   }
 
-  login(credentials: UserCredentials): Observable<LoginResponse> {
+  login(credentials: UserCredentials, selectedRole: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.baseUrl}/auth/login`, credentials)
       .pipe(tap(result => {
-        if (result && result.token) {
-          this.token = result.token;
+        if (result && result.jwtToken) {
+          this.token = result.jwtToken;
           this.user = JSON.parse(atob(this.token.split(".")[1]));
+          if (result.roles) {
+            this.currentUserRoles = result.roles;
+            this.currentlyLoggedInRole = selectedRole;
+          }
           localStorage.setItem('authUser', JSON.stringify(result));
         } else {
           console.error("No token in login response");

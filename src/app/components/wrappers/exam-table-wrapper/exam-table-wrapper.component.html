@@ -1,5 +1,14 @@
 <app-exam-table
-  [role]="role"
+  (registerExamEvent)="registerExams($event)"
+  (updateEvent)="setExam($event)"
+  (deleteEvent)="deleteExam($event)"
+  (exportPdfEvent)="exportToPdf($event)"
+  (exportXmlEvent)="exportToXml($event)">
+</app-exam-table>
+
+<!-- TODO: For each studentOnYear in studentOnYears display studentonYear.examinations in table-->
+ <app-exam-table
+  [dataSource]="registeredExams"
   (updateEvent)="setExam($event)"
   (deleteEvent)="deleteExam($event)"
   (exportPdfEvent)="exportToPdf($event)"

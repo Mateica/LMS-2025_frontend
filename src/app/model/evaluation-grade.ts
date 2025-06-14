@@ -9,3 +9,11 @@ export interface EvaluationGrade {
     mark : number;
     active? : boolean;
 }
+
+export interface EvaluationGradeView {
+  id?: number;
+  studentIndex: string;
+  teacherFullName: string;
+  dateTimeEvaluated: Date;
+  mark: number;
+}

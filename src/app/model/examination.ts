@@ -9,6 +9,4 @@ export interface Examination {
 	evaluations? : Evaluation[];
 	studentOnYear? : StudentOnYear;
 	active? : boolean;
-
-
 }

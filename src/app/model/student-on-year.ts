@@ -12,5 +12,4 @@ export interface StudentOnYear {
 	examinations? : Examination[];
 	studentAffairsOffice? : StudentAffairsOffice;
 	active? : boolean;
-
 }

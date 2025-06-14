@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit{
 
   const email = this.loginForm.value.email ?? '';
   const password = this.loginForm.value.password ?? '';
-  const selectedRoles = this.loginForm.value.roles ?? '';
+  const selectedRole = this.loginForm.value.roles ?? '';
 
   if (!email || !password) {
     this.toaster.error('Email and password cannot be empty.');
@@ -64,18 +64,18 @@ export class LoginComponent implements OnInit{
     password
   };
 
-  this.service.login(userCredentials).subscribe({
+  this.service.login(userCredentials, selectedRole).subscribe({
     next: (data: LoginResponse) => {
       console.log('Login success:', data);
       localStorage.setItem('authUser', JSON.stringify(data));
 
       if (this.service.isLoggedIn()) {
-        if (!data.roles.includes(selectedRoles)) {
+        if (!data.roles.includes(selectedRole)) {
           this.toaster.error("You don't have permission to access the selected role!");
           return;
         }
 
-        switch (selectedRoles) {
+        switch (selectedRole) {
           case 'ADMIN':
             this.router.navigate(['admin']);
             break;

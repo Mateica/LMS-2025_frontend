@@ -10,6 +10,7 @@ import { Evaluation } from '../../../model/evaluation';
 
 @Component({
   selector: 'app-evaluation-grade-form-wrapper',
+  standalone : true,
   imports: [EvaluationGradeFormComponent],
   templateUrl: './evaluation-grade-form-wrapper.component.html',
   styleUrl: './evaluation-grade-form-wrapper.component.css'
@@ -28,13 +29,25 @@ export class EvaluationGradeFormWrapperComponent implements OnInit {
               private router : Router){}
               
   ngOnInit(): void {
-    this.evaluationService.getAllActive().subscribe((r) => this.evaluations = r);
-    this.teacherService.getAllActive().subscribe((r)=> this.teachers = r);
+    this.evaluationService.getAllActive().subscribe((r) => {
+        this.evaluations = r;
+        console.log(this.evaluations);
+        
+    });
+
+    this.teacherService.getAllActive().subscribe((r)=> {
+      this.teachers = r;
+      console.log(this.teachers);
+      
+    });
     this.getAllActive();
   }
 
   getAll(){
-    this.service.getAll().subscribe((r)=> this.grades = r);
+    this.service.getAll().subscribe((r)=> {
+      this.grades = r;
+      console.log(this.grades);
+    });
   }
 
   getAllActive(){
@@ -47,8 +60,10 @@ export class EvaluationGradeFormWrapperComponent implements OnInit {
 
   createGrade(t : EvaluationGrade){
     if(t.id !== undefined){
+      console.log(t);
       this.service.update(Number(t.id), t).subscribe(() => this.service.getAllActive());
     }else{
+      console.log(t);
       this.service.create(t).subscribe(() => this.service.getAllActive());
     }
   }

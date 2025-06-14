@@ -19,9 +19,8 @@ import {
 } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { ExaminationService } from '../../../service/examination/examination.service';
-import { Router } from '@angular/router';
 import { Examination } from '../../../model/examination';
-import { Role } from '../../../model/role';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-exam-table',
@@ -39,12 +38,11 @@ import { Role } from '../../../model/role';
 })
 export class ExamTableComponent implements OnInit {
   @Input() exam: Examination | null = null;
-  @Input() role: Role | null = null;
-
   @Output() updateEvent = new EventEmitter<Examination>();
   @Output() deleteEvent = new EventEmitter<Examination>();
   @Output() exportPdfEvent = new EventEmitter<Examination>();
   @Output() exportXmlEvent = new EventEmitter<Examination>();
+  @Output() registerExamEvent = new EventEmitter<Examination>();
 
   displayedColumns = [
     'numberOfPoints',
@@ -54,6 +52,7 @@ export class ExamTableComponent implements OnInit {
     'actions',
   ];
 
+  @Input()
   dataSource = new MatTableDataSource<Examination>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -61,7 +60,7 @@ export class ExamTableComponent implements OnInit {
 
   constructor(
     private examService: ExaminationService,
-    private router: Router
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -114,11 +113,26 @@ export class ExamTableComponent implements OnInit {
     this.deleteEvent.emit(exam);
   }
 
+  onRegisterExam(exam : Examination){
+    console.log("On register exam");
+    this.registerExamEvent.emit(exam);
+  }
+
   onExportPdf(exam: Examination) {
     this.exportPdfEvent.emit(exam);
   }
 
   onExportXml(exam: Examination) {
     this.exportXmlEvent.emit(exam);
+  }
+
+  containsRole(roleName: string): boolean {
+    const currentUserRoles = this.authService.currentUserRoles;
+    return currentUserRoles.includes(roleName);
+  }
+
+  currentlyLoggedInRoleEquals(roleName: string): boolean {
+    const currentlyLoggedInRole = this.authService.currentlyLoggedInRole;
+    return currentlyLoggedInRole === roleName;
   }
 }

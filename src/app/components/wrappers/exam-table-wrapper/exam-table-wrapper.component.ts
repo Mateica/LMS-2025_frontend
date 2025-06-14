@@ -10,7 +10,6 @@ import { StudentOnYearService } from '../../../service/student-on-year/student-o
 import { StudentService } from '../../../service/student/student.service';
 import { ExportService } from '../../../service/export/export.service';
 import { ToastrService } from 'ngx-toastr';
-import { Role } from '../../../model/role';
 
 @Component({
   selector: 'app-exam-table-wrapper',
@@ -22,15 +21,12 @@ export class ExamTableWrapperComponent implements OnInit {
   exams!: MatTableDataSource<Examination>; 
   exam : Examination | null = null;
 
-  role : Role | null = null;
-
   students! : MatTableDataSource<Student>;
   studentOnYears! : MatTableDataSource<StudentOnYear>;
 
   student : Student | null = null;
 
-  @Input()
-  studentOnYear : StudentOnYear | null = null;
+  registeredExams = new MatTableDataSource<Examination>(this.student?.studentsOnYear[0].examinations);
 
   constructor(private examService : ExaminationService, private studentService : StudentService, private studentOnYearService : StudentOnYearService, private exportService : ExportService, private toaster : ToastrService, private router : Router){}
 
@@ -81,23 +77,26 @@ export class ExamTableWrapperComponent implements OnInit {
     this.examService.softDelete(Number(t.id)).subscribe(()=> this.getAllActive());
   }
 
-  registerExams(exams: Examination[]) {
-    if (!this.studentOnYear) return;
+  registerExams(e: Examination) {
+    console.table(e);
+    const studentOnYear = e.studentOnYear;
+    console.log(studentOnYear);
+    if (!studentOnYear) {
+      return;
+    }
 
-    if (!this.studentOnYear.examinations) {
-      this.studentOnYear.examinations = [];
+    if (!studentOnYear.examinations) {
+      studentOnYear.examinations = [];
     }
 
     // Provera duplikata - student ne moze vise put prijaviti ispit u jednom roku
-    for (const e of exams) {
-      const registeredExam = this.studentOnYear.examinations.some(existing => existing.id === e.id);
-      if (registeredExam) {
-        this.toaster.error("You have already registered this exam for this exam period!");
-        continue;
-      }
-      this.studentOnYear.examinations.push(e);
+    const registeredExam = studentOnYear.examinations.some(existing => existing.id === e.id);
+    if (registeredExam) {
+      this.toaster.error("You have already registered this exam for this exam period!");
+      return
     }
-}
+    this.studentOnYearService.registerExam(e, studentOnYear.id).subscribe(() => this.toaster.success("You have successfully registered an exam!"));
+  }
 
 exportToPdf(exam: Examination) {
     this.exportService.exportExaminationToPDF(exam).subscribe({

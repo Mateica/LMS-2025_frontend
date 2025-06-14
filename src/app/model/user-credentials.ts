@@ -12,6 +12,6 @@ export interface SignupCredentials {
 }
 
 export interface LoginResponse {
-    token : string;
+    jwtToken : string;
     roles : string[];
 }
