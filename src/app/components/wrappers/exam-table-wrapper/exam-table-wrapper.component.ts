@@ -42,7 +42,6 @@ export class ExamTableWrapperComponent implements OnInit {
     this.studentOnYearService.getAllActive().subscribe((r : StudentOnYear[])=>{
       this.studentOnYears = new MatTableDataSource(r);
     })
-    
   }
 
   getAll(){

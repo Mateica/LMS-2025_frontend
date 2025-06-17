@@ -5,10 +5,13 @@ import { EvaluationInstrumentService } from '../../../service/evaluation-instrum
 import { Router } from '@angular/router';
 import { FileService } from '../../../service/file/file.service';
 import { File } from '../../../model/file';
+import { MatFormField, MatLabel, MatOption, MatSelect } from '@angular/material/select';
+import { Evaluation } from '../../../model/evaluation';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-evaluation-instrument-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgFor, MatSelect, MatOption, MatFormField, MatLabel],
   templateUrl: './evaluation-instrument-form.component.html',
   styleUrl: './evaluation-instrument-form.component.css'
 })
@@ -16,10 +19,13 @@ export class EvaluationInstrumentFormComponent {
   @Input()
   evaluationInstrument : EvaluationInstrument | null = null;
   files : File[] = [];
+  evaluations: Evaluation[] = [];
   
     @Input()
     public evaluationInstrumentForm = new FormGroup({
           name : new FormControl('',[Validators.required]),
+          evaluation : new FormControl(null),
+          file : new FormControl(null)
         });
           
         @Output()

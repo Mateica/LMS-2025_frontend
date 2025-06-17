@@ -35,7 +35,7 @@ export class EvaluationGradeFormComponent {
     evaluation: new FormControl(null, []),
     teacher: new FormControl(null, []),
     dateTimeEvaluated: new FormControl(new Date, [Validators.required]),
-    mark: new FormControl(0, [Validators.required, Validators.min(5)])
+    mark: new FormControl(0, [Validators.required, Validators.min(5), Validators.max(10)])
 
   });
 

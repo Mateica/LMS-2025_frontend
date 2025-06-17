@@ -21,6 +21,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { ExaminationService } from '../../../service/examination/examination.service';
 import { Examination } from '../../../model/examination';
 import { AuthService } from '../../../auth/auth.service';
+import { FileService } from '../../../service/file/file.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-exam-table',
@@ -31,13 +34,16 @@ import { AuthService } from '../../../auth/auth.service';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    NgIf
   ],
   templateUrl: './exam-table.component.html',
   styleUrl: './exam-table.component.css',
 })
 export class ExamTableComponent implements OnInit {
   @Input() exam: Examination | null = null;
+  @Input() canRegister: boolean = true;
+  @Input() canHandleFile: boolean = true;
   @Output() updateEvent = new EventEmitter<Examination>();
   @Output() deleteEvent = new EventEmitter<Examination>();
   @Output() exportPdfEvent = new EventEmitter<Examination>();
@@ -60,8 +66,10 @@ export class ExamTableComponent implements OnInit {
 
   constructor(
     private examService: ExaminationService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private fileService: FileService,
+    private toaster : ToastrService
+  ) { }
 
   ngOnInit() {
     this.examService.getAllActive().subscribe((exams) => {
@@ -113,7 +121,7 @@ export class ExamTableComponent implements OnInit {
     this.deleteEvent.emit(exam);
   }
 
-  onRegisterExam(exam : Examination){
+  onRegisterExam(exam: Examination) {
     console.log("On register exam");
     this.registerExamEvent.emit(exam);
   }
@@ -135,4 +143,44 @@ export class ExamTableComponent implements OnInit {
     const currentlyLoggedInRole = this.authService.currentlyLoggedInRole;
     return currentlyLoggedInRole === roleName;
   }
+
+  // TODO: Pitati asistenta da li je EvaluationInstrument neophodan model i da li je bolje file vezati za sam evaluation
+  // TODO: onHandleFile() raditi za svaki evaluation unutar jednog examination
+ onHandleFile(exam: Examination) {
+  const role = this.authService.currentlyLoggedInRole;
+
+  if (role === 'STUDENT') {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/pdf';
+
+    input.onchange = () => {
+      const file = input.files?.[0];
+      if (!file) return;
+
+      const studentId = exam.studentOnYear?.id;
+      const evalId = exam.evaluations?.[0]?.id;
+
+      if (!studentId) {
+        this.toaster.error('Missing student ID.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('mpf', file);
+      formData.append('studentId', studentId.toString());
+      formData.append('description', 'Student file upload');
+      formData.append('url', 'N/A');
+
+      this.fileService.uploadFile(formData).subscribe({
+        next: () => this.toaster.error('File uploaded successfully.'),
+        error: () => this.toaster.error('File upload failed.')
+      });
+    };
+
+    input.click();
+  }
+}
+
+
 }

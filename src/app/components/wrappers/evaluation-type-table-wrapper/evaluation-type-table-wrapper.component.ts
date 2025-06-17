@@ -21,6 +21,10 @@ export class EvaluationTypeTableWrapperComponent {
     });
   }
   
+  getAllActive(){
+    this.service.getAllActive().subscribe((r)=> this.evaluationTypes = r);
+  }
+  
   updateEvaluationType(t : EvaluationType){
     this.router.navigate(["/evaluationTypeForm"]);
   }

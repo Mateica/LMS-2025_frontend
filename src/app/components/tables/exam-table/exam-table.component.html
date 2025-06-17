@@ -46,10 +46,12 @@
         @if(containsRole('TEACHER') && currentlyLoggedInRoleEquals('TEACHER')){
           <button mat-button color="accent" (click)="onExportPdf(row)">Export PDF</button>
           <button mat-button color="accent" (click)="onExportXml(row)">Export XML</button>
+          <button *ngIf="canHandleFile" mat-button color="primary" (click)="onHandleFile(row)">Handle file</button>
         }
 
         @if(containsRole('STUDENT') && currentlyLoggedInRoleEquals('STUDENT')){
-          <button mat-button color="primary" (click)="onRegisterExam(row)">Register an exam</button>
+          <button *ngIf="canRegister" mat-button color="primary" (click)="onRegisterExam(row)">Register an exam</button>
+          <button *ngIf="canHandleFile" mat-button color="primary" (click)="onHandleFile(row)">Handle file</button>
           <button mat-button color="accent" (click)="onExportPdf(row)">Export PDF</button>
           <button mat-button color="accent" (click)="onExportXml(row)">Export XML</button>
         }

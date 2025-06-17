@@ -8,7 +8,7 @@
 
     <ng-container matColumnDef="evaluation">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Evaluation</th>
-      <td mat-cell *matCellDef="let row">{{ row.evaluation.evaluationType.name }} - {{row.evaluation.subjectRealization.subject.name}} - {{row.evaluation.evaluationInstrument?.name}}</td>
+      <td mat-cell *matCellDef="let row">{{ row.evaluation.evaluationType?.name ?? "" }} - {{row.evaluation.subjectRealization?.subject?.name ?? ""}} - {{row.evaluation.evaluationInstrument?.name}}</td>
     </ng-container>
 
     <ng-container matColumnDef="mark">

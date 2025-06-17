@@ -96,6 +96,18 @@ export const routes: Routes = [
         },
         canActivate: [authGuard]
     },
+    {
+        path: 'evaluationTypeForm', component : EvaluationTypeFormWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER","STAFF"]
+        },
+        canActivate: [authGuard]
+    },
+    {
+        path: 'evaluationIntrumentForm', component : EvaluationTypeFormWrapperComponent, data:{
+            allowedRoles: ["ADMIN", "TEACHER","STAFF"]
+        },
+        canActivate: [authGuard]
+    },
      {
          path: 'evaluationGradeForm', component : EvaluationGradeFormWrapperComponent, data:{
              allowedRoles: ["ADMIN", "TEACHER"]
